@@ -2807,13 +2807,7 @@ body {
     gap: clamp(32px, 4vw, 40px);
   }
 
-  .home-hero-text {
-    text-align: center;
-  }
 
-  .home-hero-actions {
-    justify-content: center;
-  }
 
   .home-hero-image {
     max-width: 460px;
