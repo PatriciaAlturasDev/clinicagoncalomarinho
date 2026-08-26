@@ -44,6 +44,7 @@
     Site.mountAlternatingCardReveal('.consultas-modality-card');
     Site.mountStaggeredCardReveal('.consultas-types', '.consultas-type-card', 'h3');
     Site.mountStaggeredCardReveal('.area-manifest-inverted', '.area-manifest-card', 'h3');
+    Site.mountStaggeredCardReveal('.area-symptoms:not(.area-manifest-inverted)', '.area-manifest-card', 'h3');
   };
 
   function init() {

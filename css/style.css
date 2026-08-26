@@ -325,22 +325,22 @@ main {
    :not(:first-of-type) skips each page's first <section> (its hero),
    which stays visible from the start.
 
-   The three full-bleed dark sections (home-areas / consultas-types /
-   area-manifest-inverted) never hide the section itself — its
-   background is always painted, so there's no gap of missing colour
+   The full-bleed card-grid sections (home-areas / consultas-types /
+   area-manifest-inverted / area-symptoms) never hide the section itself —
+   its background is always painted, so there's no gap of missing colour
    before it "arrives" — and skip this whole-block treatment entirely.
    They're all card grids, so instead their cards pop in one by one; see
    the "Staggered grid reveal" block further down and
    js/scroll-reveal.js's mountStaggeredCardReveal().
    ============================ */
-main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.area-manifest-inverted) {
+main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.area-manifest-inverted):not(.area-symptoms) {
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   will-change: opacity, transform;
 }
 
-main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.area-manifest-inverted).is-visible {
+main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.area-manifest-inverted):not(.area-symptoms).is-visible {
   opacity: 1;
   transform: none;
 }
@@ -362,10 +362,11 @@ main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.are
    CSS from first paint; js/scroll-reveal.js's mountStaggeredCardReveal()
    staggers .is-visible onto each card in turn once the section is in view.
 
-   .area-manifest-card is scoped to .area-manifest-inverted specifically —
-   the same class is reused on regular (light) area pages via
-   js/manifest-grid.js, where it stays under the plain section-level
-   fade/rise above instead.
+   .area-manifest-card gets this staggered treatment on both variants —
+   .area-manifest-inverted (neurodesenvolvimento.html's dark grid) and
+   .area-symptoms (the "Quando procurar ajuda" grid on each área de
+   atuação detail page, e.g. ansiedade.html) — so both pop their cards in
+   one by one the same way.
 
    The heading of each section hides too and reveals at the same moment
    the card sequence starts (see mountStaggeredCardReveal's headingSelector
@@ -375,9 +376,11 @@ main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.are
 .home-area-card,
 .consultas-type-card,
 .area-manifest-inverted .area-manifest-card,
+.area-symptoms .area-manifest-card,
 .home-areas-title,
 .consultas-types > .area-container > h3,
-.area-manifest-inverted h3 {
+.area-manifest-inverted h3,
+.area-symptoms h3 {
   opacity: 0;
   transform: translateY(28px) scale(0.94);
   will-change: opacity, transform;
@@ -390,18 +393,22 @@ main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.are
    just declared there instead so it doesn't get lost). */
 .consultas-type-card,
 .area-manifest-inverted .area-manifest-card,
+.area-symptoms .area-manifest-card,
 .home-areas-title,
 .consultas-types > .area-container > h3,
-.area-manifest-inverted h3 {
+.area-manifest-inverted h3,
+.area-symptoms h3 {
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .home-area-card.is-visible,
 .consultas-type-card.is-visible,
 .area-manifest-inverted .area-manifest-card.is-visible,
+.area-symptoms .area-manifest-card.is-visible,
 .home-areas-title.is-visible,
 .consultas-types > .area-container > h3.is-visible,
-.area-manifest-inverted h3.is-visible {
+.area-manifest-inverted h3.is-visible,
+.area-symptoms h3.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -410,9 +417,11 @@ main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.are
   .home-area-card,
   .consultas-type-card,
   .area-manifest-inverted .area-manifest-card,
+  .area-symptoms .area-manifest-card,
   .home-areas-title,
   .consultas-types > .area-container > h3,
-  .area-manifest-inverted h3 {
+  .area-manifest-inverted h3,
+  .area-symptoms h3 {
     opacity: 1;
     transform: none;
     transition: none;
