@@ -2522,11 +2522,16 @@ html.is-menu-locked body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-2);
   margin-top: var(--space-2);
   font-size: clamp(14px, 13.17px + 0.22vw, 16px);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.3px;
   line-height: 1.2;
+}
+
+.home-area-card-name {
+  min-width: 0;
 }
 
 .home-area-card-arrow {
@@ -2877,7 +2882,13 @@ body {
   }
 }
 
-@media (min-width: 450px) and (max-width:750px) {
+@media (min-width: 450px) and (max-width:600px) {
+  .home-areas-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 601px) and (max-width:950px) {
   .home-areas-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
