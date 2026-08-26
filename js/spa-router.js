@@ -188,8 +188,14 @@
       }
 
       // Reset scroll so the new page starts at the top — happens behind
-      // the overlay, so it's never seen as a jump.
+      // the overlay, so it's never seen as a jump. The actual scrolling
+      // element here is <body> (see the html/body overflow-x rule in
+      // style.css, which keeps <html> pinned to the viewport height and
+      // makes <body> the real scroll container), so window.scrollTo alone
+      // is a no-op — reset all three to be safe across browsers.
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
 
       Site.updateActiveNav(page);
       Site.mountAreaCta();
