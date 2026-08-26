@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F7F6F2" />
+  <title>Clínica Gonçalo Marinho</title>
+  <meta name="description" content="Clínica Gonçalo Marinho — psiquiatria e pedopsiquiatria em Lisboa, com uma abordagem próxima, rigorosa e baseada em evidência científica." />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/areas-data.js" defer></script>
+  <script src="js/team-data.js" defer></script>
+  <script src="js/dom-utils.js" defer></script>
+  <script src="js/url-utils.js" defer></script>
+  <script src="js/img-fallback.js" defer></script>
+  <script src="js/header.js" defer></script>
+  <script src="js/footer.js" defer></script>
+  <script src="js/whatsapp-float.js" defer></script>
+  <script src="js/scroll-reveal.js" defer></script>
+  <script src="js/area-cta.js" defer></script>
+  <script src="js/manifest-grid.js" defer></script>
+  <script src="js/area-detail.js" defer></script>
+  <script src="js/home-areas.js" defer></script>
+  <script src="js/home-approach.js" defer></script>
+  <script src="js/team-grid.js" defer></script>
+  <script src="js/team-detail.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1/bundle/libphonenumber-js.min.js" defer></script>
+  <script src="js/booking-form.js" defer></script>
+  <script src="js/spa-router.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body class="page-home">
+  <div id="site-header"></div>
+  <main>
+
+    <!-- HERO -->
+    <section class="home-hero section-spacing">
+      <div class="home-hero-grid">
+        <div class="home-hero-text">
+          <!-- <p class="home-eyebrow">Consultas de Psiquiatria e Pedopsiquiatria</p> -->
+          <h1>Equipa especializada nas Perturbações do Neurodesenvolvimento</h1>
+          <div class="home-hero-actions">
+            <a href="neurodesenvolvimento.html" class="home-hero-btn home-hero-btn--blue">NO ADULTO</a>
+            <a href="neurodesenvolvimento-crianca.html" class="home-hero-btn home-hero-btn--white">NA CRIANÇA</a>
+          </div>
+        </div>
+        <div class="home-hero-image">
+          <img src="assets/Imagem-1.svg" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ÁREAS DE ATUAÇÃO -->
+    <section class="home-areas section-spacing">
+      <div class="home-areas-grid">
+        <div class="home-areas-title">
+          <h4>Áreas de atuação</h4>
+        </div>
+
+        <div id="home-areas-slot"></div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="home-intro section-spacing">
+      <img src="assets/hp-yellow.svg" alt="" class="home-intro-decor home-intro-decor--yellow" aria-hidden="true" />
+      <div class="home-intro-container">
+        <div class="home-intro-card">
+          <p>A Clínica Gonçalo Marinho nasceu da vontade de criar um espaço onde cada pessoa se possa sentir escutada, compreendida e acompanhada com proximidade e rigor.</p>
+        </div>
+      </div>
+       <img src="assets/hp-red.svg" alt="" class="home-intro-decor home-intro-decor--red" aria-hidden="true" />
+    </section>
+
+    <!-- A NOSSA ABORDAGEM CLÍNICA -->
+    <section class="home-approach section-spacing">
+      <div class="home-approach-container">
+        <div class="home-approach-head">
+          <h2>A nossa abordagem clínica</h2>
+          <p>A forma como acompanhamos cada pessoa é tão importante quanto o diagnóstico.</p>
+        </div>
+
+        <div class="home-approach-list">
+          <div id="home-approach-slot"></div>
+          <script type="application/json" id="home-approach-data">
+            [
+              {
+                "color": "blue",
+                "icon": "assets/neuroafirmativa.svg",
+                "title": "Neuroafirmativa",
+                "text": "Reconhecemos diferentes formas de funcionamento como expressões naturais da diversidade humana, valorizando a individualidade de cada pessoa e promovendo uma intervenção respeitadora das suas características e necessidades."
+              },
+              {
+                "color": "yellow",
+                "icon": "assets/empatica.svg",
+                "title": "Empática",
+                "text": "Escutamos com atenção, validamos quaisquer emoções e procuramos compreender a experiência individual de cada pessoa, construindo uma relação terapêutica próxima, respeitosa e livre de julgamentos."
+              },
+              {
+                "color": "red",
+                "icon": "assets/inclusiva.svg",
+                "title": "Inclusiva",
+                "text": "Respeitamos a diversidade e a identidade de cada pessoa, promovendo um ambiente seguro, acolhedor e assertivo, onde todas são tratadas com dignidade e respeito."
+              },
+              {
+                "color": "blue",
+                "icon": "assets/evidencia.svg",
+                "title": "Baseada na evidência",
+                "text": "As nossas decisões clínicas são fundamentadas na melhor evidência científica disponível, aliando atualização contínua, experiência clínica e rigor para oferecer cuidados de elevada qualidade."
+              }
+            ]
+          </script>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="site-footer"></div>
+</body>
+</html>

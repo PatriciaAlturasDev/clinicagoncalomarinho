@@ -1,0 +1,4421 @@
+/* ============================
+   Design Tokens (CSS variables)
+   ============================ */
+:root {
+  /* Colors */
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-soft: #333333;
+
+  --color-header-bg: #F7F6F2;
+  --color-footer-bg: #111111;
+  --color-footer-text: #ffffff;
+  --color-footer-text-muted: rgba(255, 255, 255, 0.78);
+
+  --color-accent: #FF001C;
+
+  --color-button-bg: #111111;
+  --color-button-bg-hover: #2a2a2a;
+  --color-button-text: #ffffff;
+  --color-button-shadow: rgba(0, 0, 0, 0.22);
+
+  /* Typography */
+  --font-family-base: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Fluid type scale — clamp(mobile, fluid, desktop) so every size
+     scales continuously between breakpoints instead of jumping at fixed
+     media queries, interpolating between a 375px and a 1280px viewport
+     (the same two breakpoints the h1–h3 floors/ceilings were already
+     tuned to). Desktop ceilings: h1 40, h2 36, h3 32, h4 28, h5 24,
+     h6 20 — an even 4px step down per level. Mobile floors keep h1–h4's
+     original values (28/23/19/16); h5/h6 are new, so their floors just
+     continue the same shrinking-gap pattern. xs/sm/base/lg follow suit
+     one step down from h6, each a 1-2px mobile-to-desktop range so body
+     copy, labels and small print scale too instead of staying static. */
+  --font-size-xs: clamp(11px, 10.59px + 0.11vw, 12px);
+  --font-size-sm: clamp(13px, 12.59px + 0.11vw, 14px);
+  --font-size-base: clamp(14px, 13.17px + 0.22vw, 16px);
+  --font-size-md: var(--font-size-base);
+  --font-size-h1: clamp(32px, 23.03px + 1.33vw, 40px);
+  --font-size-h2: clamp(26px, 17.6px + 1.44vw, 36px);
+  --font-size-h3: clamp(24px, 13.6px + 1.44vw, 32px);
+  --font-size-h4: clamp(18px, 11.01px + 1.33vw, 28px);
+  --font-size-h5: clamp(16px, 11.29px + 0.99vw, 24px);
+  --font-size-h6: clamp(14px, 11.53px + 0.66vw, 20px);
+  --font-size-body-lg: clamp(16px, 15.17px + 0.22vw, 18px);
+  --font-size-lg: var(--font-size-body-lg);
+  --font-size-xl: clamp(24px, 20.68px + 0.88vw, 32px);
+
+  --line-height-h1: 1.2;
+  --line-height-h2: 1.25;
+  --line-height-h3: 1.3;
+  --line-height-h4: 1.4;
+  --line-height-h5: 1.4;
+  --line-height-h6: 1.45;
+  --line-height-body: 1.25;
+  --line-height-small: 1.4;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --letter-spacing-tight: -0.5px;
+  --letter-spacing-default: 0.2px;
+  --letter-spacing-wide: 0.6px;
+  --letter-spacing-wider: 0.8px;
+  --letter-spacing-widest: 1.2px;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-9: 64px;
+  --space-10: 80px;
+  --space-11: 80px;
+
+  /* Layout */
+  --container-max: 1280px;
+  --container-padding: 24px;
+  --container-padding-sm: var(--space-5);
+
+  /* Borders & radii — same fluid clamp(mobile, fluid, desktop) approach
+     and 375px -> 1280px interpolation as the font-size scale above, so
+     card/panel corners round off a little tighter on small screens
+     instead of staying at their full desktop radius. Ordered smallest to
+     largest desktop ceiling; --radius-7 is the one exception with a wider
+     mobile floor drop (20 -> 14 instead of the usual ~4px step), kept for
+     .home-area-card specifically to match its previously hand-tuned
+     mobile value. */
+  --radius-1: clamp(8px, 7.17px + 0.22vw, 10px);
+  --radius-2: clamp(10px, 9.17px + 0.22vw, 12px);
+  --radius-3: clamp(12px, 11.17px + 0.22vw, 14px);
+  --radius-4: clamp(13px, 11.76px + 0.33vw, 16px);
+  --radius-5: clamp(14px, 12.34px + 0.44vw, 18px);
+  --radius-6: clamp(16px, 14.34px + 0.44vw, 20px);
+  --radius-7: clamp(14px, 11.51px + 0.66vw, 20px);
+  --radius-pill: 999px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-smooth: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Active nav dot */
+  --dot-size: 5px;
+}
+
+/* ============================
+   Section spacing (utility)
+   ----------------------------
+   Shared vertical rhythm for full-bleed page sections (.area-hero,
+   .home-hero, .consultas-types, .contact-hero, etc.) — add this class
+   alongside a section's own class so its background/color rule stays
+   focused on that, while every section's spacing (and its responsive
+   reduction) comes from this one place instead of being duplicated and
+   tuned separately per section.
+   ============================ */
+.section-spacing {
+  padding: 80px 0;
+}
+
+@media (max-width: 1024px) {
+  .section-spacing {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-spacing {
+    padding: 40px 0;
+  }
+}
+
+/* ============================
+   Base
+   ============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+    word-spacing: normal;
+    font-weight: var(--font-weight-regular);
+}
+
+
+
+/* Long single words (e.g. "Neurodesenvolvimento") in a narrow mobile column
+   would otherwise overflow their box instead of wrapping. */
+h1, h2, h3, h4, h5, h6, p, li, a, span {
+  overflow-wrap: break-word;
+}
+
+/* Standard heading sizes for page/section titles. Fluid via clamp(), so
+   there's no separate mobile breakpoint to keep in sync. Card- and
+   list-level h2/h3/h4 keep their own smaller, context-specific font-size. */
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h5);
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h6);
+}
+
+p {
+  line-height: var(--line-height-body);
+}
+
+small {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-small);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Grid/flex items default to min-width: auto, which lets long text content
+   (a long word, a wide paragraph) force the item — and the whole track —
+   wider than the container instead of wrapping. Reset it to 0 everywhere
+   we lay out a text block or image as a grid item, so content always
+   wraps within the space the grid actually gives it. */
+.area-hero-grid > *,
+.home-hero-grid > *,
+.consultas-hero-grid > *,
+.contact-hero-grid > *,
+.team-detail-grid > *,
+.terms-card > *,
+.contact-where-grid > *,
+.consultas-modality-grid > *,
+.area-manifest-grid > *,
+.area-bullets > * {
+  min-width: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+main {
+  flex: 1;
+}
+
+/* ============================
+   SPA page-transition overlay
+   ----------------------------
+   Covers the viewport while spa-router.js swaps in the next page's
+   <main> and waits for its images to load, so navigation never shows
+   a layout jump or the raw DOM swap.
+   ============================ */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--color-bg);
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.22s ease;
+}
+
+.page-transition-overlay.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.page-transition-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(17, 17, 17, 0.12);
+  border-top-color: var(--color-text);
+  border-radius: 50%;
+  animation: page-transition-spin 0.8s linear infinite;
+}
+
+@keyframes page-transition-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-overlay {
+    transition: none;
+  }
+  .page-transition-spinner {
+    animation: none;
+  }
+}
+
+/* ============================
+   Scroll-reveal
+   ----------------------------
+   Hidden by default in plain CSS (not via a class js/scroll-reveal.js
+   adds after the fact) — that's the point: CSS is render-blocking, so
+   these are already invisible in the very first paint, with no gap
+   where the content shows and then gets hidden by a script running a
+   beat later. js's only job is to add .is-visible once a section is
+   scrolled to (or shortly after mount, if it's already on screen).
+
+   :not(:first-of-type) skips each page's first <section> (its hero),
+   which stays visible from the start.
+
+   The three full-bleed dark sections (home-areas / consultas-types /
+   area-manifest-inverted) never hide the section itself — its
+   background is always painted, so there's no gap of missing colour
+   before it "arrives" — and skip this whole-block treatment entirely.
+   They're all card grids, so instead their cards pop in one by one; see
+   the "Staggered grid reveal" block further down and
+   js/scroll-reveal.js's mountStaggeredCardReveal().
+   ============================ */
+main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.area-manifest-inverted) {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  will-change: opacity, transform;
+}
+
+main section:not(:first-of-type):not(.home-areas):not(.consultas-types):not(.area-manifest-inverted).is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main section:not(:first-of-type) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================
+   Staggered grid reveal
+   ----------------------------
+   The card grids inside the three dark full-bleed sections — each card
+   pops up on its own as the section scrolls into view, one after another,
+   rather than the whole grid fading in as a single block. Hidden in plain
+   CSS from first paint; js/scroll-reveal.js's mountStaggeredCardReveal()
+   staggers .is-visible onto each card in turn once the section is in view.
+
+   .area-manifest-card is scoped to .area-manifest-inverted specifically —
+   the same class is reused on regular (light) area pages via
+   js/manifest-grid.js, where it stays under the plain section-level
+   fade/rise above instead.
+
+   The heading of each section hides too and reveals at the same moment
+   the card sequence starts (see mountStaggeredCardReveal's headingSelector
+   argument) — otherwise it would just sit there fully visible while the
+   cards are still hidden below it.
+   ============================ */
+.home-area-card,
+.consultas-type-card,
+.area-manifest-inverted .area-manifest-card,
+.home-areas-title,
+.consultas-types > .area-container > h3,
+.area-manifest-inverted h3 {
+  opacity: 0;
+  transform: translateY(28px) scale(0.94);
+  will-change: opacity, transform;
+}
+
+/* .home-area-card's transition lives on its own rule further down instead
+   — it already declares one for its :hover lift, and a second `transition`
+   declaration on the same selector would silently replace that one rather
+   than merge with it (same duration, opacity/transform 0.8s ease-out,
+   just declared there instead so it doesn't get lost). */
+.consultas-type-card,
+.area-manifest-inverted .area-manifest-card,
+.home-areas-title,
+.consultas-types > .area-container > h3,
+.area-manifest-inverted h3 {
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.home-area-card.is-visible,
+.consultas-type-card.is-visible,
+.area-manifest-inverted .area-manifest-card.is-visible,
+.home-areas-title.is-visible,
+.consultas-types > .area-container > h3.is-visible,
+.area-manifest-inverted h3.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-area-card,
+  .consultas-type-card,
+  .area-manifest-inverted .area-manifest-card,
+  .home-areas-title,
+  .consultas-types > .area-container > h3,
+  .area-manifest-inverted h3 {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================
+   Decor reveal
+   ----------------------------
+   Same idea as scroll-reveal above (hidden in plain CSS from first paint,
+   js/scroll-reveal.js's mountDecorReveal() adds .is-visible once mounted
+   — immediately if already on screen, via IntersectionObserver otherwise)
+   applied to the background vector shapes instead of whole sections —
+   its own zoom-in, distinct from the section's own fade/rise, so the
+   shape reads as its own little entrance rather than just riding along
+   with the section. transform-origin stays at each shape's own visual
+   anchor (bottom-left/bottom-right/etc., matching how it's positioned)
+   instead of the default center, so the zoom grows from the corner it's
+   pinned to rather than drifting away from it.
+   ============================ */
+.home-intro-decor,
+.area-info-decor,
+.terms-decor,
+.booking-decor--red,
+.booking-dot--yellow {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.home-intro-decor.is-visible,
+.area-info-decor.is-visible,
+.terms-decor.is-visible,
+.booking-decor--red.is-visible,
+.booking-dot--yellow.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.home-intro-decor--red,
+.booking-decor--red { transform-origin: bottom right; }
+.area-info-decor--red { transform-origin: bottom left; }
+.area-info-decor--blue { transform-origin: bottom right; }
+.terms-decor-red { transform-origin: top left; }
+.terms-decor-yellow,
+.terms-decor-blue { transform-origin: bottom right; }
+.booking-dot--yellow { transform-origin: center; }
+
+/* .home-intro-decor--yellow and .booking-decor--blue each also carry
+   their own transform (translateY(-50%) to vertically center;
+   rotate(-75deg), set alongside their top/left position further down)
+   — fold the zoom into both states here instead of clobbering it, and
+   outrank the generic rule above on specificity (two classes vs one)
+   rather than relying on source order. */
+.home-intro-decor.home-intro-decor--yellow {
+  transform-origin: left center;
+  transform: translateY(-50%) scale(0.5);
+}
+
+.home-intro-decor.home-intro-decor--yellow.is-visible {
+  transform: translateY(-50%);
+}
+
+.booking-decor.booking-decor--blue {
+  opacity: 0;
+  transform: scale(0.5) rotate(-75deg);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.booking-decor.booking-decor--blue.is-visible {
+  opacity: 1;
+  transform: rotate(-75deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro-decor,
+  .area-info-decor,
+  .terms-decor,
+  .booking-decor--blue,
+  .booking-decor--red,
+  .booking-dot--yellow {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .home-intro-decor--yellow {
+    transform: translateY(-50%);
+  }
+
+  .booking-decor--blue {
+    transform: rotate(-75deg);
+  }
+}
+
+/* ============================
+   Focus states
+   ----------------------------
+   :focus-visible only shows for keyboard/assistive-tech navigation, not
+   mouse clicks, so it never fights the hover treatments above — a soft
+   accent ring, consistent across every button and card-as-link.
+   ============================ */
+.cta-button:focus-visible,
+.home-hero-btn:focus-visible,
+.area-cta-button:focus-visible,
+.booking-submit:focus-visible,
+.team-card:focus-visible,
+.home-area-card:focus-visible {
+  outline: 2.5px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ============================
+   Header
+   ============================ */
+.header {
+  background: var(--color-header-bg);
+  padding: var(--space-6) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo img {
+  /* Fixed-height <img> with no width set, so it scales at its natural
+     165:60 aspect ratio — shrinking it is what actually leaves room for
+     the hamburger/CTA button beside it once the header switches to the
+     mobile layout at 1024px, down to its floor around 340px, rather than
+     the three overflowing/wrapping the header row. */
+  height: clamp(48px, 18.08px + 4.09vw, 60px);
+  display: block;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.nav-item {
+  position: relative;
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-text);
+  padding: var(--space-1) var(--space-4);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  transition: color var(--transition-fast);
+}
+
+.nav-item:hover {
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nav-item.active {
+  font-weight: var(--font-weight-bold);
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom:-8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+
+/* ============================
+   Dropdown menu (Áreas de Atuação)
+   ============================ */
+.nav-item-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.nav-trigger {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: none;
+}
+
+.nav-trigger span {
+  display: inline-block;
+}
+
+.nav-trigger .chevron {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.has-dropdown:hover .nav-trigger .chevron,
+.has-dropdown.is-open .nav-trigger .chevron,
+.has-dropdown:focus-within .nav-trigger .chevron {
+  transform: rotate(-180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  margin-top: 14px;
+  background: #ffffff;
+  border-radius: var(--radius-3);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.10),
+    0 6px 14px rgba(0, 0, 0, 0.04);
+  padding: var(--space-2);
+  min-width: 240px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 200;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    visibility 0s linear var(--transition-base);
+}
+
+/* Invisible hover bridge so moving the cursor from the
+   trigger into the panel doesn't close the dropdown. */
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: 0;
+  right: 0;
+  height: 18px;
+}
+
+/* Click-toggle open state (works on every device). The
+   hover-based open is gated by @media (hover: hover) below. */
+.has-dropdown.is-open .dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    visibility 0s linear 0s;
+}
+
+.dropdown-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px var(--space-4);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-default);
+  color: var(--color-text);
+  border-radius: var(--radius-1);
+  white-space: nowrap;
+  font-weight: var(--font-weight-medium);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    padding-left var(--transition-fast);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus-visible {
+  background: var(--color-header-bg);
+  color: var(--color-text);
+  padding-left: calc(var(--space-4) + 6px);
+  outline: none;
+}
+
+.dropdown-item.is-current {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.dropdown-item.is-current::before {
+  content: '';
+  display: inline-block;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background: var(--color-accent);
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ============================
+   CTA Button (Marcar Consulta)
+   ============================ */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  flex-shrink: 0;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  will-change: transform, box-shadow, background-color;
+  transition:
+    background-color var(--transition-smooth),
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    letter-spacing var(--transition-smooth);
+}
+
+.cta-button svg,
+.cta-button img {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  transition: transform var(--transition-smooth);
+}
+
+.cta-button:hover {
+  background: var(--color-button-bg-hover);
+  transform: translateY(-2px);
+}
+
+.cta-button:hover svg,
+.cta-button:hover img {
+  transform: scale(1.12) rotate(-6deg);
+}
+
+.cta-button:active {
+  background: var(--color-button-bg-hover);
+  transform: translateY(-2px);
+}
+
+/* ============================
+   Page placeholder
+   ============================ */
+.page-content {
+  padding: var(--space-10) var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ============================
+   Footer
+   ============================ */
+.footer {
+  background: var(--color-footer-bg);
+  color: var(--color-footer-text);
+  padding: var(--space-5) 0;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.footer-logo img {
+  height: clamp(40px, 35.03px + 1.33vw, 52px);
+  display: block;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links a {
+  font-size: var(--font-size-sm);
+  color: var(--color-footer-text-muted);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+.footer-link {
+  display: inline-block;
+  transition: color var(--transition-fast);
+}
+
+/* Same hover mechanic as .nav-item in the header — text gets bolder
+   instead of growing an underline — so the two link groups read as one
+   consistent interaction pattern. The colour brightening on top of that
+   is footer-specific: unlike .nav-item (already full colour at rest),
+   footer links start muted, so hover needs to visibly light them up too. */
+.footer-link:hover {
+  color: var(--color-footer-text);
+}
+
+.social-list {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(26px, 23.51px + 0.66vw, 32px);
+  height: clamp(26px, 23.51px + 0.66vw, 32px);
+  transition: color var(--transition-base), transform var(--transition-base);
+}
+
+.social-icon svg {
+  width: clamp(13px, 11.76px + 0.33vw, 16px);
+  height: clamp(13px, 11.76px + 0.33vw, 16px);
+  display: block;
+}
+
+.social-icon:hover {
+  color: var(--color-footer-text);
+  transform: translateY(-2px);
+}
+
+/* ============================
+   Team — grid (equipa.html) + card component
+   shared with the detail page's "A nossa Equipa" slideshow.
+   ============================ */
+.team-page h1 {
+  text-align: center;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.5px;
+  margin: 0 0 var(--space-8);
+}
+
+.team-page h1::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #FF001C;
+  border-radius: 2px;
+  margin: var(--space-4) auto 0;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 360px));
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 1vw, 16px);
+}
+
+/* Equipa page: cards pop in one by one as each row scrolls into view (see
+   js/scroll-reveal.js's mountStaggeredCardReveal, called from
+   js/team-grid.js) — same translateY+scale reveal, same 0.8s ease-out
+   timing, as the other staggered card groups (.consultas-type-card etc.
+   in the "Staggered grid reveal" block above), so every group's entrance
+   looks identical. Hidden by default in CSS for the same reason it is
+   everywhere else — no flash before a script hides it. Scoped to
+   #team-grid so it never touches the duplicated .team-card markup in the
+   team-detail slideshow.
+
+   The <h1> hides and reveals the same way, in sync with the first card
+   (mountStaggeredCardReveal's headingSelector) — .team-page is normally
+   exempt from the site's hero-section-stays-visible convention (it's the
+   page's first section), but leaving the title always visible while the
+   cards were still fading in below it read as broken instead of as a
+   deliberate staggered entrance. */
+#team-grid .team-card,
+.team-page h1 {
+  opacity: 0;
+  transform: translateY(28px) scale(0.94);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+#team-grid .team-card.is-visible,
+.team-page h1.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* This ID-scoped rule above outranks the plain .team-card:hover further
+   down (an id+class beats a class+pseudo-class), so without this override
+   the :hover lift inside the grid would inherit the reveal's slow 0.8s
+   instead of staying snappy. */
+#team-grid .team-card:hover {
+  transition: transform var(--transition-smooth);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #team-grid .team-card,
+  .team-page h1 {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 450px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team-card {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-5);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--color-header-bg);
+  transition: transform var(--transition-smooth);
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+}
+
+.team-card-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-4);
+  overflow: hidden;
+}
+
+.team-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Top-anchored instead of the default center crop: the top of the source
+     photo is always kept in full, so all overflow crop comes off the
+     shoulders/bottom instead of ever cutting into the head. */
+  object-position: center top;
+  display: block;
+  transition: filter 0.5s ease, transform 0.5s ease;
+  filter: brightness(0.96) grayscale(100%);
+  /* Matches object-position above so the hover zoom also grows from the
+     top edge downward, instead of expanding into the head from below. */
+  transform-origin: center top;
+}
+
+/* Photo warms from grayscale to full colour and eases in slightly on
+   hover — a calm, human touch for the team page rather than a generic
+   zoom, and it plays off the grayscale treatment already in place. */
+.team-card:hover .team-card-photo img:not(.img-fallback) {
+  transform: scale(1.05);
+}
+
+/* Generic-user placeholder swapped in on load failure (see IMG_FALLBACK_ATTR
+   in components.js) — shown inset and un-stretched on a soft background
+   instead of filling the frame like a real photo would. */
+.team-card-photo img.img-fallback,
+.team-detail-photo img.img-fallback {
+  object-fit: contain;
+  padding: 32%;
+  background: var(--color-header-bg);
+  filter: none;
+  opacity: 0.55;
+  border-radius: var(--radius-4);
+}
+
+.team-detail-photo img {
+  width: 100%;
+}
+
+.team-card-badge {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2;
+  border-radius: var(--radius-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 14px 18px;
+}
+
+.team-card-info {
+  font-size: clamp(11px, 10.17px + 0.22vw, 13px);
+  line-height: 1.35;
+  color: #111111;
+}
+
+.team-card-info strong {
+  display: block;
+  font-size: clamp(13px, 11.76px + 0.33vw, 16px);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 2px;
+}
+
+.team-card-plus {
+  flex-shrink: 0;
+  font-size: clamp(16px, 14.34px + 0.44vw, 20px);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: inherit;
+}
+
+.team-card-plus i {
+  display: inline-block;
+  transition: transform var(--transition-smooth);
+}
+
+.team-card:hover .team-card-plus i {
+  transform: translateX(6px);
+}
+
+.team-card-badge--yellow { background: #f5c518; }
+.team-card-badge--red    { background: #FF001C; color: #ffffff; }
+.team-card-badge--red .team-card-info { color: #ffffff; }
+.team-card-badge--blue   { background: #005BAF; color: #ffffff; }
+.team-card-badge--blue .team-card-info { color: #ffffff; }
+
+/* Below this width the grid is 2 (or 1) columns, so each card is much
+   narrower — a taller card plus smaller badge text keeps a wrapped
+   two-line name from climbing up and covering the face. */
+@media (max-width: 750px) {
+  .team-card {
+    aspect-ratio: 3 / 4;
+  }
+
+  .team-card-badge {
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    padding: 10px 14px;
+  }
+
+  .team-card-info strong {
+    margin-bottom: 1px;
+  }
+}
+
+/* Detail page (equipa-membro.html) */
+.team-detail-hero {
+  background: #ffffff;
+}
+
+.team-detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: clamp(18px, 17.17px + 0.22vw, 20px);
+  font-weight: var(--font-weight-semibold);
+  color: #005BAF;
+  margin-bottom: var(--space-6);
+}
+
+.team-detail-back i {
+  font-size: clamp(18px, 17.17px + 0.22vw, 20px);
+  display: inline-block;
+  transition: transform var(--transition-smooth);
+}
+
+.team-detail-back:hover i {
+  transform: translateX(-6px);
+}
+
+.team-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 4vw, 40px);
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .team-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stacked layout gives the photo the full container width, which reads as
+     "not shrinking" even though the container itself is narrower — cap it
+     explicitly so it visibly gets smaller at each step down. */
+  .team-detail-photo {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .team-detail-photo {
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 400px) {
+  .team-detail-photo {
+    max-width: 260px;
+  }
+}
+
+.team-detail-text h1 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.5px;
+  margin: 0 0 4px;
+}
+
+/* Scoped to .team-detail-text .team-detail-role (not just .team-detail-role)
+   so it reliably outranks .team-detail-text p — a plain class selector
+   was losing font-size/font-weight/color to that rule (class+element beats
+   a lone class), silently rendering the role as identical to body text
+   instead of the smaller, muted-grey label it's meant to be. */
+.team-detail-text .team-detail-role {
+  position: relative;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-soft);
+  margin: 0 0 var(--space-6);
+  padding-bottom: var(--space-4);
+}
+
+.team-detail-role::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 64px;
+  height: 2px;
+  background: #005BAF;
+  border-radius: 2px;
+}
+
+.team-detail-text p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  margin: 0 0 var(--space-4);
+  font-weight: var(--font-weight-regular);
+  text-align: justify;
+}
+
+@media (max-width: 600px) {
+  .team-detail-photo {
+    padding: 28px 28px 0 0;
+  }
+
+  .team-detail-decor {
+    width: 64px;
+  }
+}
+
+.team-more {
+  background: #ffffff;
+}
+
+.page-equipa-membro .team-more {
+  padding-top: 0;
+}
+
+.team-more h3 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.4px;
+  margin: 0 0 var(--space-6);
+  text-align: center;
+}
+
+.team-more h3::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #FF001C;
+  border-radius: 2px;
+  margin: var(--space-3) auto 0;
+}
+
+/* position: relative anchors the prev/next buttons (added below). */
+.team-slideshow {
+  position: relative;
+  width: 100%;
+}
+
+/* Fixed-width viewport clipping the sliding track — no scrollbar, nothing
+   the user can drag; the only motion is the track's own CSS animation.
+   Vertical padding reserves headroom so the card's hover lift
+   (.team-card:hover translateY) doesn't get clipped at the top edge.
+
+   Two things soften what would otherwise be a hard rectangular crop:
+   border-radius rounds the strip itself into the same soft shape as the
+   cards inside it (18px, matching .team-card) instead of a raw box: it
+   only rounds the four corners, though, so on its own a card cut off
+   mid-height by the straight side edges would still look sliced — the
+   mask handles that part, fading each edge to transparent over a narrow
+   strip (not a wide, noticeable band) so a card caught mid-scroll eases
+   out of view instead of ending in a hard vertical line. */
+.team-slideshow-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 6px 0;
+  border-radius: var(--radius-5);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+}
+
+.team-slideshow-track {
+  display: flex;
+  gap: var(--space-5);
+  width: max-content;
+  animation-name: team-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+/* Entered the moment the marquee pauses (hover — see js/team-detail.js's
+   settleTeamSlideshow) — it settles to the nearest full card instead of
+   staying wherever the continuous scroll happened to freeze. Without this
+   a paused card sitting mid-slide gets sliced clean in half right at the
+   viewport edge, which (with no border to signal "this is an edge") just
+   reads as a flat wall rather than a paused carousel. */
+.team-slideshow-track.is-manual {
+  animation: none;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Prev/next: hidden until the marquee is actually paused (hover is what
+   triggers that — see js/team-detail.js's settleTeamSlideshow, called on
+   mouseenter), so they never compete with the auto-scroll or invite clicks
+   that would just get overridden a moment later. Same dark pill colour as
+   the site's other buttons (--color-button-bg), just round and small — a
+   quiet control rather than its own visual centerpiece. */
+.team-slideshow-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  font-size: var(--font-size-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-out, background var(--transition-fast);
+  z-index: 1;
+}
+
+.team-slideshow-nav:hover {
+  background: var(--color-button-bg-hover);
+}
+
+.team-slideshow-nav--prev {
+  left: var(--space-6);
+}
+
+.team-slideshow-nav--next {
+  right: var(--space-6);
+}
+
+.team-slideshow:hover .team-slideshow-nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-slideshow-track.is-manual {
+    transition: none;
+  }
+}
+
+/* Same fixed square as the team-grid card, stepping down at the same
+   breakpoints already used elsewhere on this page. */
+.team-slideshow .team-card {
+  flex: 0 0 360px;
+  width: 360px;
+  aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 1024px) {
+  .team-slideshow .team-card {
+    flex-basis: 280px;
+    width: 280px;
+  }
+}
+
+@media (max-width: 600px) {
+  .team-slideshow .team-card {
+    flex-basis: 220px;
+    width: 220px;
+  }
+}
+
+.team-slideshow-track.is-sliding {
+  animation-play-state: running;
+}
+
+@keyframes team-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(var(--team-slide-distance, -100%)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-slideshow-track {
+    animation: none;
+  }
+}
+
+/* ============================
+   Legal pages
+   ============================ */
+.legal-page {
+  padding: var(--space-9) var(--container-padding) var(--space-11);
+  max-width: 880px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.legal-page h1 {
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-5);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.legal-page h2 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.legal-page p {
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-3);
+  max-width: 70ch;
+}
+
+/* ============================
+   Termos e Condições — page layout with decorative vectors
+   and dark two-column card.
+   ============================ */
+.terms-page {
+  position: relative;
+  padding: clamp(56px, 6vw, 80px) 0 clamp(80px, 10vw, 140px);
+}
+
+.terms-decor {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.terms-decor-red {
+  top: clamp(48px, 6vw, 80px);
+  left: 0;
+  width: clamp(120px, 14vw, 200px);
+  height: auto;
+}
+
+.terms-decor-yellow,
+.terms-decor-blue {
+  bottom: clamp(48px, 6vw, 80px);
+  right: 0;
+  width: clamp(160px, 18vw, 260px);
+  height: auto;
+}
+
+
+
+/* Inline accent for emails and other highlighted strings */
+.terms-email {
+  color: #f5c518;
+  font-weight: var(--font-weight-semibold);
+  word-break: break-word;
+}
+
+.policy-section .terms-email {
+  color: #fff;
+}
+
+.terms-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.terms-header {
+  text-align: center;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.terms-header h1 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -1px;
+  margin: 0 0 var(--space-3);
+  color: var(--color-text);
+}
+
+.terms-header h1::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #FF001C;
+  border-radius: 2px;
+  margin: var(--space-4) auto 0;
+}
+
+.terms-header p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-soft);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.terms-header p strong {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.terms-card {
+  background: #111111;
+  color: #ffffff;
+  border-radius: clamp(20px, 2.2vw, 32px);
+  padding: clamp(36px, 4.5vw, 60px) clamp(28px, 4vw, 60px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 4vw, 40px);
+}
+
+.terms-column {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 2.6vw, 36px);
+}
+
+.terms-section h3 {
+  font-size: clamp(18px, 16.34px + 0.44vw, 22px);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.terms-section h3::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: #f5c518;
+  margin-top: var(--space-2);
+  border-radius: 2px;
+}
+
+.policy-section.terms-section h3::after {
+  background: #005BAF;
+}
+
+.terms-section p {
+  font-size: var(--font-size-sm);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.7);
+  margin: var(--space-3) 0 var(--space-2);
+}
+
+.terms-section .terms-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-2);
+}
+
+.terms-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: var(--font-size-sm);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 4px;
+}
+
+.terms-list li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  background: #f5c518;
+  border-radius: 50%;
+}
+
+.policy-section .terms-list li::before {
+  background: #005BAF;
+}
+
+@media (max-width: 768px) {
+  .terms-card {
+    grid-template-columns: 1fr;
+  }
+
+  .terms-decor-red,
+  .terms-decor-yellow,
+  .terms-decor-blue {
+    width: 100px;
+    opacity: 0.1;
+  }
+
+  .terms-decor-red {
+    top: 16px;
+    left: 0;
+  }
+
+  .terms-decor-yellow,
+  .terms-decor-blue {
+    bottom: 16px;
+    right: 0;
+  }
+}
+
+/* ============================
+   SPA shell — skeleton so the header/footer placeholders
+   already have the right background colour on first paint.
+   This prevents the white flash before JS injects content.
+   ============================ */
+#site-header {
+  background: var(--color-header-bg);
+  min-height: 80px;
+  /* body is a flex column and page content is routinely taller than the
+     viewport; without this the flex algorithm shrinks this wrapper toward
+     0 height (content still renders via overflow, but reserves no space),
+     letting the sticky header inside it sit on top of the first section
+     instead of pushing it down. */
+  flex-shrink: 0;
+}
+
+#site-footer {
+  background: var(--color-footer-bg);
+  z-index: 40;
+  flex-shrink: 0;
+}
+
+/* Hover-only dropdown — guarded so touch devices don't get
+   sticky hover after a tap. */
+@media (hover: hover) {
+  .has-dropdown:hover .dropdown,
+  .has-dropdown:focus-within .dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+    transition:
+      opacity var(--transition-base),
+      transform var(--transition-base),
+      visibility 0s linear 0s;
+  }
+}
+
+/* ============================
+   Header actions (CTA + hamburger)
+   ============================ */
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hamburger:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.hamburger svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.hamburger-close {
+  display: none;
+}
+
+.header.is-menu-open .hamburger-open {
+  display: none;
+}
+
+.header.is-menu-open .hamburger-close {
+  display: inline-flex;
+}
+
+html.is-menu-locked,
+html.is-menu-locked body {
+  overflow: hidden;
+}
+
+/* ============================
+   Area pages — content sections
+   ============================ */
+.area-page {
+  display: block;
+}
+
+.area-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  width: 100%;
+}
+
+/* Hero — white background. Same fluid padding as .home-hero / .consultas-hero
+   so the hero band sits at the same height across pages instead of jumping
+   between fixed breakpoint steps as you navigate. */
+.area-hero {
+  background: #ffffff;
+}
+
+.area-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Stretch (not center) so .area-hero-image can fill the row's full
+     height below — the row height is set by the taller column, normally
+     the text, so the image scales up/down with how much text there is. */
+  align-items: stretch;
+  gap: clamp(32px, 4vw, 40px);
+}
+
+.area-hero-text h1,
+.area-hero-title {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -2px;
+  line-height: 1.05;
+  margin: 0 0 var(--space-5);
+}
+
+.area-hero-text h1::after,
+.area-hero-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background:#FF001C;
+  margin-top: var(--space-4);
+  border-radius: 2px;
+}
+
+.area-hero-text p, .area-hero-text li {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-2);
+  text-align: justify;
+}
+
+.area-hero-text .hero-title-light {
+  font-weight: var(--font-weight-regular);
+  letter-spacing: -0.5px;
+}
+
+.area-intro-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-4);
+  margin-right: 0;
+}
+
+.area-intro-list li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-base);
+  line-height: 1.55;
+  color: var(--color-text-soft);
+}
+
+.area-intro-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  background: #FF001C;
+  border-radius: 50%;
+}
+
+.area-intro-list strong {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.area-hero-image {
+  /* Positioning context for the absolutely-placed img below — this keeps
+     the img (and its own intrinsic aspect ratio) from counting towards
+     this item's size when the grid works out the row's auto height, which
+     must come from .area-hero-text alone (see .area-hero-grid above). An
+     in-flow img here — even at height:100% — still reports its own
+     natural/max-height-clamped size during that pass, so a tall
+     illustration could inflate the row past the text's own height and
+     leave the text column with dead space below its last paragraph.
+     Taking the img out of flow makes this item's own contribution to that
+     pass exactly 0, so the row (and both columns) end up exactly as tall
+     as the text — never more. */
+  position: relative;
+  height: 100%;
+}
+
+.area-hero-image img {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 80%;
+  display: block;
+  height: 100%;
+  max-height: 320px;
+}
+
+@media (max-width: 1024px) {
+  .area-hero-image {
+    height: 190px;
+  }
+
+  .area-hero-image img {
+    height: 190px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .area-hero-image {
+    height: 160px;
+  }
+
+  .area-hero-image img {
+    height: 160px;
+    width: 100%;
+  }
+}
+
+/* "Quando procurar ajuda?" — single dark section with iconified bullets */
+.area-symptoms {
+  background: #fff;
+  color: #111111;
+}
+
+.area-symptoms h3 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.4px;
+  margin: 0 0 clamp(32px, 4vw, 56px);
+}
+.area-symptoms h3::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background:#FF001C;
+  margin-top: var(--space-4);
+  border-radius: 2px;
+}
+
+/* Inverted variant — black section, centered heading, wider card grid
+   (used by neurodesenvolvimento.html) */
+.area-manifest-inverted {
+  background: #111111;
+}
+
+.area-manifest-inverted h3 {
+  color: #ffffff;
+  text-align: center;
+}
+
+/* text-align: center above only centers the heading's text — the ::after
+   underline bar is a block-level box, which text-align doesn't touch, so
+   without this it stayed pinned to the left edge under a centered title. */
+.area-manifest-inverted h3::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.area-manifest-inverted .area-manifest-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+  .area-manifest-inverted .area-manifest-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .area-manifest-inverted .area-manifest-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .area-manifest-inverted .area-manifest-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.area-bullets {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 4vw, 40px);
+  margin: 0;
+  padding: 0;
+}
+
+.area-bullets li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--font-size-lg);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Bigger colored dot containing a white icon */
+.area-bullets .dot {
+  flex-shrink: 0;
+  width: clamp(48px, 4.6vw, 60px);
+  height: clamp(48px, 4.6vw, 60px);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  padding: 12px;
+}
+
+.area-bullets .dot svg {
+  width: 52%;
+  height: 52%;
+  display: block;
+}
+
+.area-bullets .dot i {
+  font-size: clamp(22px, 20.34px + 0.44vw, 26px);
+  line-height: 1;
+  display: inline-block;
+}
+
+.area-bullets .dot img {
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* PNG icons from Flaticon individual catalog are typically black on
+   transparent. Recolour them to match the dot context: white on
+   red/blue dots, original (black) on yellow/white dots. */
+.area-bullets .dot-red img,
+.area-bullets .dot-blue img,
+.area-bullets .dot-yellow img,
+.area-bullets .dot-orange img {
+  filter: brightness(0) invert(1);
+}
+
+.area-bullets .dot-orange { background: #ff6b00; }
+.area-bullets .dot-blue   { background: #005BAF; }
+.area-bullets .dot-yellow { background: #f5c518; color: #fff; }
+.area-bullets .dot-red    { background: #FF001C; }
+.area-bullets .dot-white  { background: #ffffff; color: #111111; }
+
+/* Yellow CTA banner — reusable component rendered by JS */
+.area-cta {
+  background: #ffffff;
+}
+
+.area-cta-banner {
+  background: #FFC820;
+  border-radius: var(--radius-6);
+  padding: clamp(24px, 2.6vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 1vw, 16px);
+  flex-wrap: wrap;
+}
+
+.area-cta-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.area-cta-lead {
+  font-size: var(--font-size-base);
+  color: #111111;
+  letter-spacing: 0;
+}
+
+.consultas-cta .area-cta-banner {
+  flex-direction: column !important;
+  text-align: center;
+}
+
+.area-cta-headline {
+  font-size: clamp(20px, 16.69px + 0.88vw, 28px);
+  font-weight: var(--font-weight-bold);
+  color: #111111;
+  line-height: 1.25;
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+.area-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  flex-shrink: 0;
+  transition: background var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.area-cta-button:hover {
+  background: var(--color-button-bg-hover);
+  transform: translateY(-2px);
+}
+
+.area-cta-button svg,
+.area-cta-button img {
+  width: 22px;
+  height: 22px;
+  stroke: var(--color-button-text);
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  transition: transform var(--transition-smooth);
+}
+
+.area-cta-button:hover svg,
+.area-cta-button:hover img {
+  transform: scale(1.12) rotate(-6deg);
+}
+
+/* ============================
+   Area pages — "Incluem-se neste grupo" info card
+   (used instead of an illustration in the hero grid)
+   ============================ */
+.area-hero-grid--info {
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+.area-includes {
+  background: var(--color-header-bg);
+  border-radius: clamp(18px, 2vw, 24px);
+  padding: clamp(24px, 3vw, 36px) clamp(22px, 3vw, 32px);
+}
+
+.area-includes h5 {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-4);
+}
+
+.area-includes ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.area-includes li {
+  position: relative;
+  padding-left: 18px;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  color: var(--color-text-soft);
+}
+
+.area-includes li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 6px;
+  background: #FF001C;
+}
+
+/* "Como se podem manifestar" — card grid variant */
+.area-manifest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* minmax(0, 1fr) row tracks make every row match the tallest row's
+     content automatically — no fixed/calculated height needed, and it
+     keeps working if a future manifest item's text is longer than any
+     of today's. */
+  grid-auto-rows: minmax(0, 1fr);
+  gap: clamp(16px, 1vw, 16px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-items: center;
+}
+
+.area-manifest-card {
+  background: #ffffff;
+  border-radius: var(--radius-5);
+  padding: clamp(16px, 2vw, 24px);
+  min-height: 266px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+  justify-content: space-around;
+  width: 100%;
+}
+
+.area-manifest-card .icon-circle {
+  width: clamp(46px, 6.5vw, 84px);
+  height: clamp(46px, 6.5vw, 84px);
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.area-manifest-card .icon-circle img {
+  width: 48%;
+  height: 48%;
+  object-fit: contain;
+}
+
+.area-manifest-card p {
+  flex: 1 1 auto;
+  width: 100%;
+  font-size: var(--font-size-body-lg);
+  line-height: 1.2;
+  color: #111111;
+  margin: 0;
+  text-align: center !important;
+}
+
+.area-manifest-card .underline {
+  width: 26px;
+  height: 3px;
+  border-radius: 2px;
+  margin-top: var(--space-3);
+}
+
+.icon-circle--red,
+.underline--red { background: #FF001C; }
+
+.icon-circle--blue,
+.underline--blue { background: #005BAF; }
+
+.icon-circle--yellow,
+.underline--yellow { background: #f5c518; }
+
+.icon-circle--white,
+.underline--white { background: #ffffff; }
+
+.icon-circle--black,
+.underline--black { background: #111111; }
+
+.icon-circle--red img,
+.icon-circle--blue img,
+.icon-circle--black img {
+  filter: brightness(0) invert(1);
+}
+
+.area-manifest-card--dark {
+  background: #111111;
+}
+
+.area-manifest-card--dark p {
+  color: #ffffff;
+}
+
+/* Plain (colorless) icon-circle on a dark card falls back to a translucent
+   white chip with an inverted icon — colored variants override this below. */
+.area-manifest-card--dark .icon-circle {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.area-manifest-card--dark .icon-circle img {
+  filter: brightness(0) invert(1);
+}
+
+.area-manifest-card--dark .icon-circle--red,
+.area-manifest-card--dark .icon-circle--blue,
+.area-manifest-card--dark .icon-circle--yellow,
+.area-manifest-card--dark .icon-circle--white {
+  background: initial;
+}
+
+.area-manifest-card--dark .icon-circle--red { background: #FF001C; }
+.area-manifest-card--dark .icon-circle--blue { background: #005BAF; }
+.area-manifest-card--dark .icon-circle--yellow { background: #f5c518; }
+.area-manifest-card--dark .icon-circle--white { background: #ffffff; }
+
+.area-manifest-card--dark .icon-circle--red img,
+.area-manifest-card--dark .icon-circle--blue img {
+  filter: brightness(0) invert(1);
+}
+
+.area-manifest-card--dark .icon-circle--yellow img,
+.area-manifest-card--dark .icon-circle--white img {
+  filter: none;
+}
+
+/* Cream "why it matters" info section — same container/card spacing as
+   .home-intro-container / .home-intro-card so both read as one pattern. */
+.area-info {
+  position: relative;
+  background: #ffffff;
+  padding-bottom: 0;
+}
+
+.area-info .area-container {
+  padding: 0 var(--container-padding);
+}
+
+/* Exception for the area-detail pages (ansiedade.html, burnout.html, etc.
+   and the neurodesenvolvimento pages, all rendered via <main class="area-page">):
+   7% instead of the site-wide 5% --container-padding. Placed after
+   .area-info .area-container above (same specificity, later wins) but
+   before .area-cta .area-container below, which keeps its own deliberately
+   tighter 3% for the CTA banner untouched. 
+.area-page .area-container {
+  padding: 0 7%;
+}
+*/
+
+/* Sits above .area-info-card (z-index: 2 vs the card's 1) so it's always
+   fully visible rather than hidden behind the card. Width is shared with
+   .home-intro-decor--yellow/--red (see that rule, further down) rather
+   than its own clamp — safe to share now that .area-info-card's padding
+   was widened to match .home-intro-card's, so both have the same margin
+   to work with and read as the same size. */
+.area-info-decor {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  height: auto;
+}
+
+.area-info-decor--red {
+  bottom: 0;
+  left: 0;
+}
+
+.area-info-decor--blue {
+  bottom: 0;
+  right: 0;
+}
+
+.area-info-card {
+  position: relative;
+  z-index: 1;
+  background: var(--color-header-bg);
+  border-radius: clamp(20px, 2.4vw, 32px);
+  /* Matches .home-intro-card's padding exactly (including both media
+     queries below) — that's deliberate: .area-info-decor and
+     .home-intro-decor share one width rule (see the "Decor reveal"
+     comment near the top of this file), and identical card padding is
+     what keeps that shared size safely clear of the text on both. */
+  padding: clamp(32px, 4.5vw, 56px) clamp(28px, 6vw, 80px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.area-info-card h2 {
+  font-size: clamp(20px, 15.86px + 1.1vw, 30px);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.3px;
+  color: var(--color-text);
+  margin: 0 0 var(--space-5);
+}
+
+.area-info-card h2::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #FF001C;
+  margin: var(--space-3) auto 0;
+  border-radius: 2px;
+}
+
+.area-info-card p {
+  font-size: clamp(14px, 13.17px + 0.22vw, 16px);
+  line-height: 1.65;
+  color: var(--color-text-soft);
+  text-align: center;
+  margin: 0 0 var(--space-3);
+}
+
+.area-info-card p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  .area-hero-grid--info {
+    grid-template-columns: 1fr;
+  }
+
+  .area-manifest-card {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 760px) {
+  .area-manifest-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .area-manifest-card {
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 520px) {
+  .area-manifest-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .area-manifest-card {
+    min-height: 0;
+  }
+}
+
+/* ============================
+   Homepage
+   ============================ */
+.home-eyebrow {
+  font-size: clamp(14px, 13.17px + 0.22vw, 16px);
+  color: var(--color-text-soft);
+  letter-spacing: 0.4px;
+  margin: 0 0 var(--space-5);
+}
+
+.home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-text);
+  border-bottom: 2px solid currentColor;
+  padding: 0 0 var(--space-2);
+  transition: gap var(--transition-smooth), color var(--transition-fast);
+}
+
+.home-hero .home-link {
+  color: #005BAF;
+}
+
+.home-link:hover {
+  gap: var(--space-3);
+  color: var(--color-accent);
+}
+
+.home-link-arrow {
+  display: inline-flex;
+  font-size: var(--font-size-sm);
+  line-height: 1;
+}
+
+/* Hero */
+.home-hero {
+  background: #ffffff;
+}
+
+.home-hero-grid {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: clamp(32px, 4vw, 40px);
+  align-items: center;
+}
+
+.home-hero-text h1 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -1.2px;
+  line-height: 1.08;
+  margin: 0 0 clamp(24px, 3vw, 32px);
+  color: var(--color-text);
+}
+
+.home-hero-accent {
+  color: #005BAF;
+}
+
+.home-hero-image img {
+  width: auto;
+  display: block;
+}
+
+
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.home-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 24px;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.3px;
+  text-align: center;
+  will-change: transform, box-shadow;
+  transition:
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    background-color var(--transition-smooth);
+}
+
+.home-hero-btn--blue {
+  background: #005BAF;
+  color: #ffffff;
+}
+
+.home-hero-btn--white {
+  background: #ffffff;
+  color: #005BAF;
+  border: 1.5px solid #005BAF;
+}
+
+.home-hero-btn:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .home-hero-actions {
+    flex-direction: column;
+  }
+
+  .home-hero-btn {
+    width: 100%;
+  }
+}
+
+/* Áreas de atuação */
+.home-areas {
+  background: #111111;
+  color: #ffffff;
+}
+
+.home-areas-grid {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+  justify-content: center;
+}
+
+.home-areas-title {
+  display: flex;
+  align-items: center;
+  padding-right: var(--space-4);
+  grid-row: 1 / 2;
+}
+
+.home-areas-title h4 {
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin: 0;
+  color: #ffffff;
+}
+
+.home-areas-title h4::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #FF001C;
+  border-radius: 2px;
+  margin-top: var(--space-3);
+}
+
+.home-area-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-7);
+  padding: clamp(14px, 1.5vw, 22px);
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  /* transition is here (not just in the "Staggered grid reveal" block)
+     because this rule comes later in the file — a second `transition`
+     declaration on the same selector doesn't merge with an earlier one,
+     it replaces it outright, which was silently dropping the reveal's
+     opacity transition and leaving it to snap instantly instead of
+     fading with the card. Same opacity/transform timing as the other
+     staggered card groups (.consultas-type-card etc.) so every group's
+     reveal looks identical; :hover below overrides transform/box-shadow
+     to the site's snappier var(--transition-smooth) — that one wins on
+     specificity (a class + :hover beats a lone class) regardless of
+     source order, so the hover lift stays quick even though this base
+     rule is the slower one. */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.8s ease-out;
+}
+
+.home-area-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.home-area-card-illu {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.home-area-card-illu img {
+  max-width: 72%;
+  max-height: 72%;
+  object-fit: contain;
+}
+
+.home-area-card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-2);
+  font-size: clamp(14px, 13.17px + 0.22vw, 16px);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+
+.home-area-card-arrow {
+  font-size: var(--font-size-body-lg);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-smooth);
+}
+
+.home-area-card:hover .home-area-card-arrow {
+  transform: translateX(4px);
+}
+
+.home-area-card--white {
+  background: #ffffff;
+  color: #111111;
+}
+
+.home-area-card--blue {
+  background: #005BAF;
+  color: #ffffff;
+}
+
+.flip {
+  transform: scaleX(-1) !important;
+}
+
+.home-area-card--yellow {
+  background: #f5c518;
+  color: #111111;
+}
+
+.home-area-card--red {
+  background: #FF001C;
+  color: #ffffff;
+}
+
+.home-area-card--dark {
+  background: #1c1c1c;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Sobre — intro card */
+.home-intro {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  /* Padding comes from .section-spacing (added in HTML) — sized to fit
+     .home-intro-decor--yellow (vertically centered via top:50%) at its
+     largest size without spilling past the section into its neighbours;
+     that decor shrinks at the same breakpoints (see its own media query)
+     so the two stay in proportion. */
+}
+
+/* Sits above .home-intro-container (z-index: 2 vs the container's 1) so
+   it's always fully visible rather than hidden behind the card. Width is
+   measured-safe against .home-intro-card's own padding box at several
+   viewports so the shape can never physically reach the text — it grows
+   more once the viewport passes the 1280px container ceiling, where
+   centering opens up a much bigger safe margin outside the card. */
+.home-intro-decor {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+}
+
+.home-intro-decor--yellow {
+  top: 50%;
+  left: 0;
+  height: auto;
+}
+
+.home-intro-decor--yellow,
+.home-intro-decor--red,
+.area-info-decor--red,
+.area-info-decor--blue {
+  width: clamp(40px, 9vw, 130px);
+}
+
+@media (min-width: 1281px) {
+  .home-intro-decor--yellow,
+  .home-intro-decor--red,
+  .area-info-decor--red,
+  .area-info-decor--blue {
+    width: clamp(115px, calc(14vw - 65px), 320px);
+  }
+}
+
+.home-intro-decor--red {
+  bottom: 0;
+  right: 0;
+  height: auto;
+}
+
+.home-intro-container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.home-intro-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-header-bg);
+  border-radius: clamp(20px, 2.4vw, 32px);
+  padding: clamp(32px, 4.5vw, 56px) clamp(28px, 6vw, 80px);
+  text-align: center;
+}
+
+.home-intro-card p {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(16px, 12.68px + 0.88vw, 24px);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* A nossa abordagem clínica */
+.home-approach {
+  background: #ffffff;
+  padding-top: 0;
+}
+
+.home-approach-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.home-approach-head {
+  text-align: center;
+  margin: 0 0 clamp(32px, 4vw, 56px);
+}
+
+.home-approach-head h2 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.6px;
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+}
+
+.home-approach-head h2::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #FF001C;
+  border-radius: 2px;
+  margin: var(--space-3) auto var(--space-2);
+}
+
+.home-approach-head p {
+  font-size: var(--font-size-base);
+  margin: 0;
+}
+
+.home-approach-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1vw, 16px);
+}
+
+.home-approach-item {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.6vw, 36px);
+  border-radius: clamp(18px, 2vw, 26px);
+  padding: clamp(20px, 2.4vw, 32px) clamp(24px, 3vw, 44px);
+  color: #ffffff;
+}
+
+.home-approach-icon {
+  width: 166px;
+}
+
+.home-approach-icon img {
+  width: 100%;
+}
+
+.home-approach-body {
+  gap: var(--space-2);
+  display: flex;
+  flex-direction: column;
+}
+
+.home-approach-body h3 {
+  font-size: clamp(18px, 17.17px + 0.22vw, 20px);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.2px;
+  margin: 0 0 6px;
+}
+
+.home-approach-body p {
+  /* Same interpolation basis (375px -> 1280px) as .home-approach-body h3
+     above, just shifted down to a 14-16px range instead of h3's 18-20px. */
+  font-size: clamp(14px, 13.17px + 0.22vw, 16px);
+  font-family: var(--font-family-base);
+  margin: 0;
+  max-width: 860px;
+}
+
+.home-approach-item--blue {
+  background: #005BAF;
+}
+
+.home-approach-item--yellow {
+  background: #f5c518;
+  color: #111111;
+}
+
+.home-approach-item--yellow .home-approach-body p {
+  color: rgba(0, 0, 0, 1);
+}
+
+.home-approach-item--red {
+  background: #FF001C;
+}
+
+/* Each card slides in from the left as it scrolls into view, layered on
+   top of the section-level fade/rise above. Hidden in plain CSS from first
+   paint, same as the rest of the scroll-reveal system; js/scroll-reveal.js's
+   mountAlternatingCardReveal() adds .is-visible per card once it's in view.
+   Below 700px the slide direction switches to bottom-to-top (see the media
+   query further down) — a sideways slide reads oddly on a narrow column. */
+.home-approach-item {
+  opacity: 0;
+  transform: translateX(-64px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  will-change: opacity, transform;
+}
+
+.home-approach-item.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-approach-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Prevent horizontal overflow on the whole document — the hero illustration
+   and decorative blobs can push past the viewport otherwise. */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.home-hero,
+.home-areas,
+.home-intro {
+  overflow-x: hidden;
+}
+
+.home-area-card-illu img,
+.home-intro-decor {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1024px) {
+  .home-hero-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 4vw, 40px);
+  }
+
+  .home-hero-text {
+    text-align: center;
+  }
+
+  .home-hero-actions {
+    justify-content: center;
+  }
+
+  .home-hero-image {
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .home-areas-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    padding: 0 var(--container-padding);
+  }
+
+  .home-areas-title {
+    grid-column: 1 / -1;
+    padding-right: 0;
+    margin-bottom: var(--space-3);
+    justify-content: center;
+    text-align: center;
+  }
+
+  .home-areas-title h4::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Stays an <h4> element (no change to the document outline), but once
+     it's a full-width title sitting above the card grid instead of a
+     compact column label beside it, h4's own size (16-28px) reads too
+     small for the job — bumped to h3's size to match the equivalent
+     "heading above a card grid" pattern used elsewhere (e.g. "As nossas
+     consultas"), not h2, which is reserved for section titles above a
+     single wide column of content, a different sort of layout below it. */
+  .home-areas-title h4 {
+    font-size: var(--font-size-h3);
+  }
+
+  .home-intro-card {
+    padding: clamp(28px, 5vw, 40px) 60px;
+  }
+
+  .home-approach-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-4);
+  }
+
+  /* Stacked on top of the text at this width (see .home-approach-item
+     above) — at the desktop 166px it reads oversized next to a single
+     centered text column, so it scales down along with everything else. */
+  .home-approach-icon {
+    width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-approach-icon {
+    width: 96px;
+  }
+}
+
+
+@media (min-width: 300px) and (max-width:450px) {
+  .home-areas-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 450px) and (max-width:750px) {
+  .home-areas-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .home-hero-grid,
+  .home-areas-grid,
+  .home-intro-container,
+  .home-approach-container {
+    padding: 0 var(--space-4);
+  }
+
+  .home-eyebrow {
+    margin-bottom: var(--space-4);
+  }
+
+  .home-areas-grid {
+    gap: 8px;
+  }
+
+  .home-area-card {
+    padding: 12px;
+  }
+
+  .home-area-card-foot {
+    font-size: var(--font-size-xs);
+  }
+
+  .home-area-card-arrow {
+    font-size: var(--font-size-base);
+  }
+
+  .home-intro-card {
+    padding: clamp(28px, 8vw, 40px) 48px;
+  }
+}
+
+/* Below this width the card is narrow enough that the yellow/red corner
+   shapes start crowding the text rather than framing it — simplest fix is
+   to drop them and let the card breathe. Once they're gone there's no
+   reason for the left/right padding to stay wider than top/bottom (that
+   extra horizontal room was only ever there to keep the text clear of the
+   shapes), so it collapses to one even value on all four sides instead. */
+@media (max-width: 450px) {
+  .home-intro-decor--yellow,
+  .home-intro-decor--red {
+    display: none;
+  }
+
+  .home-intro-card {
+    padding: clamp(24px, 6vw, 32px);
+  }
+}
+
+/* ============================
+   Responsive
+   ============================ */
+@media (max-width: 1100px) {
+  .nav-list {
+    gap: var(--space-3);
+  }
+
+  .nav-item {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-3);
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer-container {
+    flex-wrap: wrap;
+    row-gap: var(--space-4);
+  }
+
+  .area-bullets {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .area-hero-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: var(--space-4) 0;
+  }
+
+  .primary-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-header-bg);
+    padding: 80px var(--space-6) var(--space-7);
+    overflow-y: auto;
+    transform: translateY(-100%);
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.25s ease,
+      visibility 0s linear 0.35s;
+    z-index: 90;
+  }
+
+  .header.is-menu-open .primary-nav {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+    transition:
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease,
+      visibility 0s linear 0s;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+    width: 100%;
+  }
+
+  .nav-item-wrap {
+    width: 100%;
+    display: block;
+  }
+
+  .nav-item {
+    display: block;
+    padding: var(--space-4) 0;
+    font-size: var(--font-size-base);
+    letter-spacing: 0.4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    width: 100%;
+  }
+
+  .nav-trigger span {
+    margin-left: var(--space-4);
+  }
+
+  .nav-item.active::after {
+    left: -16px;
+    transform: none;
+    bottom: var(--space-5);
+  }
+
+  .nav-trigger {
+    width: 100%;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .nav-trigger .chevron {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .has-dropdown.is-open .nav-trigger .chevron {
+    transform: rotate(-180deg);
+  }
+
+  .dropdown {
+    position: static;
+    transform: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0 0 var(--space-3);
+    min-width: 0;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dropdown::before {
+    display: none;
+  }
+
+  .has-dropdown.is-open .dropdown {
+    max-height: 600px;
+    transform: translateX(0%) translateY(0);
+  }
+
+  .dropdown-list {
+    padding: var(--space-2) 0 var(--space-3) var(--space-4);
+    border-left: 2px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .dropdown-item {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+
+  .dropdown-item:hover {
+    padding-left: var(--space-4);
+  }
+
+  .hamburger {
+    display: inline-flex;
+  }
+
+  .cta-button span {
+    display: none;
+  }
+
+  .cta-button {
+    padding: var(--space-3);
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+  }
+
+  .cta-button svg,
+  .cta-button img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header-container {
+    gap: var(--space-3);
+  }
+
+  .area-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .area-hero-text h1,
+  .area-hero-title {
+    text-align: left;
+  }
+
+  .area-cta-banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .area-cta-button {
+    align-self: stretch;
+    justify-content: center;
+  }
+
+}
+
+/* Wider than .header-container's own 560px step below, but the footer
+   specifically needs to stack sooner than that: left in a row, the links
+   wrap onto a second line at these in-between widths and grow tall enough
+   to collide with the fixed WhatsApp button — stacking sidesteps that
+   instead of trying to squeeze everything into one row. */
+@media (max-width: 800px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .footer-links {
+    justify-content: center;
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: 560px) {
+  .header-container {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .area-bullets {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Below this width the 3 footer links no longer fit on one centered row —
+   flex-wrap would otherwise split them 2-then-1, which looks unbalanced.
+   Stack them one per row instead once that happens. */
+@media (max-width: 600px) {
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ============================
+   Floating WhatsApp button
+   ============================ */
+.whatsapp-float {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.12);
+  z-index: 300;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.whatsapp-float i {
+  font-size: clamp(26px, 24.34px + 0.44vw, 30px);
+  color: #25D366;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28), 0 3px 10px rgba(0, 0, 0, 0.14);
+}
+
+@media (max-width: 480px) {
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float {
+    transition: none;
+  }
+}
+
+/* ============================
+   Motion preferences
+   ============================ */
+@media (prefers-reduced-motion: reduce) {
+  .cta-button,
+  .cta-button svg,
+  .cta-button img,
+  .footer-link,
+  .social-icon,
+  .dropdown,
+  .nav-trigger .chevron,
+  .primary-nav,
+  .hamburger,
+  .area-cta-button,
+  .team-card,
+  .booking-submit i,
+  .team-card-plus i,
+  .team-detail-back i {
+    transition: none;
+  }
+}
+
+/* ============================
+   Consultas page (consultas.html)
+   ============================ */
+.consultas-hero {
+  background: #ffffff;
+}
+
+.consultas-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 4vw, 40px);
+}
+
+.consultas-hero-text h1 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.8px;
+  line-height: 1.15;
+  margin: 0 0 var(--space-4);
+  color: var(--color-text);
+}
+
+.consultas-hero-text h1::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #FF001C;
+  border-radius: 2px;
+  margin-top: var(--space-4);
+}
+/* Narrower side padding override for specific sections/pages that need
+   less breathing room than the default .area-container padding. */
+.area-cta .area-container,
+.consultas-cta .area-container,
+.home-intro-container{
+  padding: 0 3%;
+}
+
+.consultas-hero-text p {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-text-soft);
+  max-width: 460px;
+  text-align: justify;
+}
+
+.consultas-hero-image {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.consultas-hero-image svg,
+.consultas-hero-image img {
+  width: auto;
+  display: block;
+  height: 220px;
+}
+
+@media (max-width: 1024px) {
+  .consultas-hero-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 4vw, 40px);
+  }
+
+  .consultas-hero-image { max-width: 320px; margin: 0 auto; }
+  .consultas-hero-text {
+    text-align: left;
+  }
+}
+
+
+/* "As nossas consultas" — black section, 3 colored cards */
+.consultas-types {
+  background: #111111;
+  color: #ffffff;
+}
+
+.consultas-types > .area-container > h3 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.4px;
+  margin: 0 0 clamp(28px, 3.5vw, 44px);
+}
+
+.consultas-types > .area-container > h3::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #FF001C;
+  margin-top: var(--space-3);
+  border-radius: 2px;
+}
+
+.consultas-types-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1vw, 16px);
+}
+
+.consultas-type-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 1vw, 4px);
+  border-radius: var(--radius-6);
+  padding: 40px clamp(18px, 2vw, 24px);
+  min-height: 200px;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+/* Top placeholder: image on the left, text on the right */
+.consultas-type-top {
+  display: flex;
+  gap: clamp(8px, 1.6vw, 16px);
+  flex: 1;
+  width: 100%;
+}
+
+/* Fixed box (not just a max-width on the image) — the three illustrations
+   are different shapes (psiquiatria.svg is near-square, the other two are
+   noticeably wider/shorter), so width-only sizing with height:auto left
+   them rendering at visibly different heights. Every icon now fits inside
+   the same 110x110 box via object-fit: contain instead, so all three read
+   as the same size regardless of their own aspect ratio. Fixed at every
+   width on purpose — flex-shrink:0 keeps it from shrinking with the card. */
+.consultas-type-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+}
+
+.consultas-type-media svg,
+.consultas-type-media img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.consultas-type-body {
+  flex: 1;
+  /* A flex item's default min-width is auto, which refuses to shrink
+     narrower than its longest unbreakable word ("Neurodesenvolvimento") —
+     with the fixed-size icon box next to it eating into the row's width,
+     that word had nowhere to go but overflow past the card edge instead
+     of wrapping. min-width: 0 lets it actually shrink to the space left. */
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.consultas-type-card h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin: 0 0 var(--space-2);
+  overflow-wrap: break-word;
+}
+
+.consultas-type-card p {
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+/* Footer placeholder: arrow only, own container below the top row */
+.consultas-type-arrow {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-base);
+}
+
+.consultas-type-card--red {
+  background: #FF001C;
+  color: #ffffff;
+}
+
+.consultas-type-card--blue {
+  background: #005BAF;
+  color: #ffffff;
+}
+
+.consultas-type-card--yellow {
+  background: #f5c518;
+  color: #111111;
+}
+
+@media (min-width: 800px) and (max-width: 1024px) {
+  .consultas-types-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 800px) {
+  .consultas-types-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .consultas-type-body {
+    justify-content: center;
+  }
+
+  .consultas-type-card {
+    min-height: 0;
+  }
+}
+
+/* Process steps */
+.consultas-process {
+  background: #ffffff;
+}
+
+.consultas-process-grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(8px, 1.4vw, 20px);
+}
+
+.consultas-step {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 220px;
+}
+
+.consultas-step-icon {
+  position: relative;
+  width: clamp(100px, 48.57px + 11.05vw, 148px);
+  height: clamp(100px, 48.57px + 11.05vw, 148px);
+  border-radius: 50%;
+  background: var(--color-header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.consultas-step-icon img {
+  height: 45%;
+  object-fit: contain;
+}
+
+.consultas-step-num {
+  /* % instead of a fixed px offset/size — keeps it pinned to the same
+     spot on the icon's edge and the same size relative to the icon
+     (~5% inset, ~20% diameter) at every size .consultas-step-icon
+     scales to, instead of drifting off-position as that circle shrinks. */
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  background: var(--step-accent, #111111);
+  color: var(--step-accent-text, #ffffff);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Color "parameter" for a step — each variant just sets the two custom
+   properties the badge (.consultas-step-num) reads above. To add a new
+   color, add one line here; nothing else needs to change. */
+.consultas-step-icon--red    { --step-accent: #FF001C; }
+.consultas-step-icon--blue   { --step-accent: #005BAF; }
+.consultas-step-icon--yellow { --step-accent: #f5c518; --step-accent-text: #111111; }
+
+.consultas-step h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin: 0 0 var(--space-2);
+
+}
+
+.consultas-step p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.consultas-step-arrow {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.consultas-step-arrow svg {
+  width: 22px;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .consultas-process-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .consultas-step {
+    max-width: 340px;
+  }
+
+  .consultas-step-arrow {
+    height: auto;
+    transform: rotate(90deg);
+    margin: 8px;
+    align-self: center;
+  }
+}
+
+/* Modalidade de consulta */
+.consultas-modality {
+  background: var(--color-header-bg);
+}
+
+.consultas-modality-head {
+  margin: 0 0 clamp(28px, 3.5vw, 40px);
+}
+
+.consultas-modality-head h3 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.4px;
+  margin: 0 0 var(--space-2);
+  color: var(--color-text);
+}
+
+.consultas-modality-head p::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #FF001C;
+  margin-top: var(--space-3);
+  border-radius: 2px;
+}
+
+.consultas-modality-head p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.consultas-modality-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 4vw, 40px);
+  align-items: start;
+}
+
+.consultas-modality-cards {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.6vw, 20px);
+}
+
+.consultas-modality-card {
+  border-radius: var(--radius-5);
+  padding: clamp(24px, 2.6vw, 28px) clamp(24px, 2.6vw, 28px);
+  color: #ffffff;
+}
+
+.consultas-modality-card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.consultas-modality-card p {
+  font-size: var(--font-size-base);
+  margin: 0;
+  font-weight: var(--font-weight-regular);
+}
+
+.consultas-modality-card--red { background: #FF001C; }
+.consultas-modality-card--blue { background: #005BAF; }
+
+/* Slide-in from the left as each card scrolls into view — same direction
+   for both cards, same treatment as .home-approach-item above;
+   js/scroll-reveal.js's mountAlternatingCardReveal() adds .is-visible per
+   card. Below 700px the slide direction switches to bottom-to-top (see the
+   media query further down) — matches .consultas-modality-grid stacking to
+   a single column at that width, where a sideways slide reads oddly. */
+.consultas-modality-card {
+  opacity: 0;
+  transform: translateX(-64px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  will-change: opacity, transform;
+}
+
+.consultas-modality-card.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Below 700px both .home-approach-item and .consultas-modality-card stack
+   into a single column — switch their entrance from a sideways slide to a
+   bottom-to-top rise, which reads better for a full-width row. */
+@media (max-width: 700px) {
+  .home-approach-item,
+  .consultas-modality-card {
+    transform: translateY(48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consultas-modality-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .consultas-modality-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .consultas-modality-card h3 {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* CTA banner reuses .area-cta / .area-cta-banner from the area pages */
+/* ============================
+   Marcação de Consulta (marcar-consulta.html)
+   ============================ */
+.booking-hero {
+  position: relative;
+  background: #ffffff;
+}
+
+.booking-decor {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  height: auto;
+}
+
+.booking-decor--blue {
+  top: 0;
+  left: 20px;
+  width: clamp(120px, 12vw, 180px);
+  transform: rotate(-75deg);
+}
+
+.booking-decor--yellow {
+  top: clamp(10px, 2vw, 30px);
+  right: 0;
+  width: clamp(120px, 12vw, 180px);
+}
+
+.booking-decor--red-mid {
+  top: 44%;
+  left: clamp(15px, 3vw, 40px);
+  width: clamp(110px, 11vw, 160px);
+}
+
+.booking-decor--red {
+  bottom: 0;
+  right: 0;
+  width: clamp(180px, 20vw, 270px);
+}
+
+.booking-dot {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.booking-dot--yellow {
+  bottom: clamp(60px, 8vw, 110px);
+  left: clamp(20px, 4vw, 60px);
+  width: 116px;
+  height: 116px;
+  background: #f5c518;
+}
+
+.booking-dot--blue {
+  top: 33%;
+  right: clamp(60px, 9vw, 130px);
+  width: 48px;
+  height: 48px;
+  background: #005BAF;
+}
+
+/* With every accordion closed, only one shape per colour shows (blue
+   swirl, yellow dot, red blob). Opening any accordion reveals the rest —
+   see .has-open-accordion, toggled by booking-form.js. Same zoom-in as
+   the "Decor reveal" shapes near the top of this file (scale(0.5), each
+   anchored to its own corner so it grows from where it's pinned). */
+.booking-decor--yellow,
+.booking-decor--red-mid,
+.booking-dot--blue {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.booking-decor--yellow { transform-origin: top right; }
+.booking-decor--red-mid { transform-origin: center left; }
+.booking-dot--blue { transform-origin: center right; }
+
+.booking-hero.has-open-accordion .booking-decor--yellow,
+.booking-hero.has-open-accordion .booking-decor--red-mid,
+.booking-hero.has-open-accordion .booking-dot--blue {
+  opacity: 1;
+  transform: none;
+}
+
+/* Below this width the form is a single narrow column, so .booking-red-mid
+   and .booking-dot--blue (only meant to sit beside a wide two-column layout)
+   are hidden. The corner pieces stay — shrunk, flush with the section edge
+   (never negative, so nothing is clipped by the viewport) and always behind
+   the content (z-index: 0 vs .booking-container's z-index: 1), so they can
+   never cover the form regardless of its accordion-driven height. */
+@media (max-width: 900px) {
+  .booking-decor--red-mid,
+  .booking-dot--blue {
+    display: none;
+  }
+
+  .booking-decor--blue {
+    width: 60px;
+    left: 8px;
+  }
+
+  .booking-decor--yellow {
+    width: 60px;
+    right: 0;
+  }
+
+  .booking-decor--red {
+    width: 110px;
+    right: 0;
+    bottom: 0;
+  }
+
+  .booking-dot--yellow {
+    width: 46px;
+    height: 46px;
+    left: 0;
+    bottom: clamp(30px, 6vw, 60px);
+  }
+}
+
+.booking-container {
+  position: relative;
+  z-index: 1;
+  max-width: calc(640px + var(--container-padding) * 2);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.booking-head {
+  text-align: center;
+  margin: 0 0 clamp(48px, 4vw, 80px);
+}
+
+.booking-head h1 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.5px;
+  margin: 0 0 var(--space-3);
+  color: var(--color-text);
+}
+
+.booking-head h1::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #FF001C;
+  border-radius: 2px;
+  margin: var(--space-3) auto 0;
+}
+
+.booking-head p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+/* marcacao-confirmada.html — same .booking-hero/.booking-head as the form
+   itself, just centered as a single column instead of wrapping a form. */
+.booking-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.booking-confirmation-image {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin: 0 auto var(--space-6);
+}
+
+.booking-confirmation .booking-head {
+  margin-bottom: var(--space-6);
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.booking-field {
+  position: relative;
+}
+
+/* Vertical padding alone (12px top + bottom, ~15px line height) puts each
+   input's tap target close to the ~44px comfortable minimum for touch —
+   the previous var(--space-1) (4px all round) made for a cramped ~24px
+   target, easy to mis-tap on a phone. */
+.booking-field input,
+.booking-field textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.8);
+  background: transparent;
+  font-family: var(--font-family-base);
+  font-size: clamp(14px, 13.17px + 0.22vw, 16px);
+  color: var(--color-text);
+  padding: var(--space-2);
+  transition: border-color var(--transition-fast);
+  resize: none;
+}
+
+.booking-field input::placeholder,
+.booking-field textarea::placeholder {
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.booking-field input:focus,
+.booking-field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--color-text);
+}
+
+.booking-field input:invalid {
+  box-shadow: none;
+}
+
+.booking-field-error {
+  display: none;
+  font-size: var(--font-size-xs);
+  color: #FF001C;
+  margin-top: 4px;
+}
+
+.booking-field.has-error input {
+  border-bottom-color: #FF001C;
+}
+
+.booking-field.has-error .booking-field-error {
+  display: block;
+}
+
+/* Accordion — header and options panel are independent rounded blocks
+   (not one fused, clipped container), so the header keeps all four
+   rounded corners even while open. */
+.booking-accordions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin: 40px 0;
+}
+
+.booking-accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border: none;
+  border-radius: var(--radius-5);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-family-base);
+  text-align: left;
+  padding: clamp(16px, 2vw, 20px) clamp(20px, 2.4vw, 26px);
+  color: #ffffff;
+}
+
+.booking-accordion.is-open .booking-accordion-header {
+  align-items: center;
+}
+
+.booking-accordion-header strong {
+  display: block;
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.booking-accordion-header small {
+  display: block;
+  font-size: clamp(14px, 13.17px + 0.22vw, 16px);
+  font-weight: var(--font-weight-medium);
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.booking-accordion-chevron {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  transition: transform var(--transition-base);
+  transform: rotate(180deg);
+}
+
+.booking-accordion.is-open .booking-accordion-chevron {
+  transform: rotate(0deg);
+}
+
+.booking-accordion--red .booking-accordion-header { background: #FF001C; }
+.booking-accordion--blue .booking-accordion-header { background: #005BAF; }
+.booking-accordion--yellow .booking-accordion-header {
+  background: #f5c518;
+  color: #111111;
+}
+
+.booking-accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transition-base);
+}
+
+.booking-accordion.is-open .booking-accordion-panel {
+  grid-template-rows: 1fr;
+}
+
+/* This grid item must stay free of its own padding/margin: padding is
+   always part of an item's own box (grid-template-rows: 0fr can't shrink
+   it away), so any spacing here would stay visible as unwanted space even
+   while the accordion is closed. All spacing/background/radius instead
+   live on .booking-accordion-panel-box below, which is CONTENT the item
+   clips via overflow: hidden and so correctly collapses to 0. */
+.booking-accordion-panel-inner {
+  overflow: hidden;
+}
+
+.booking-accordion-panel-box {
+  padding: 8px 6px 6px;
+  background: #ffffff;
+  border-radius: var(--radius-5);
+}
+
+.booking-option {
+  border-radius: var(--radius-2);
+  padding: 14px clamp(20px, 2.4vw, 24px);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  cursor: pointer;
+  font-weight: var(--font-weight-bold);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.booking-option + .booking-option {
+  margin-top: 4px;
+}
+
+.booking-option:hover {
+  background: var(--color-header-bg);
+}
+
+.booking-option.is-selected {
+  background: var(--color-header-bg);
+  color: #111111;
+  font-weight: var(--font-weight-bold);
+}
+
+.booking-option.is-disabled {
+  color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.booking-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+  margin-top: var(--space-4);
+}
+
+.booking-checkbox input {
+  margin-top: 3px;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.booking-checkbox span {
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  color: var(--color-text-soft);
+}
+
+.booking-checkbox a {
+  color: #005BAF;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: underline;
+}
+
+.booking-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  transition: background var(--transition-smooth), transform var(--transition-smooth), opacity var(--transition-smooth);
+}
+
+.booking-submit:hover:not(:disabled) {
+  background: var(--color-button-bg-hover);
+  transform: translateY(-2px);
+}
+
+.booking-submit i {
+  transition: transform var(--transition-smooth);
+}
+
+.booking-submit:hover:not(:disabled) i {
+  transform: translateX(6px);
+}
+
+.booking-submit:disabled {
+  background: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.4);
+  cursor: not-allowed;
+}
+
+.booking-error {
+  display: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  margin-top: var(--space-2);
+  color: #FF001C;
+}
+
+.booking-error.is-visible {
+  display: block;
+}
+
+/* Web3Forms honeypot — a real form field named "botcheck" that only a bot
+   would fill in, since it's invisible to (and skipped by) real users. Off
+   left of the viewport rather than display:none/visibility:hidden, which
+   some spam bots specifically detect and avoid to evade honeypots. */
+.booking-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+@media (max-width: 480px) {
+  .booking-accordion-header strong { font-size: clamp(13px, 7px + 1.875vw, 16px); }
+  .booking-option { font-size: var(--font-size-sm); }
+}
+
+/* ============================
+   Contactos (contactos.html)
+   ============================ */
+.contact-hero {
+  background: #ffffff;
+}
+
+.contact-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 4vw, 40px);
+}
+
+.contact-hero-text h1 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.8px;
+  margin: 0 0 var(--space-5);
+  color: var(--color-text);
+}
+
+.contact-hero-text h1::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #FF001C;
+  margin-top: var(--space-4);
+  border-radius: 2px;
+}
+
+.contact-info-list {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contact-info-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+.contact-info-icon {
+  width: auto;
+  flex-shrink: 0;
+}
+
+.contact-info-list a {
+  color: inherit;
+}
+
+.contact-hero-image {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.contact-hero-image svg,
+.contact-hero-image img {
+  width: auto;
+  height: 220px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .contact-hero-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 4vw, 40px);
+  }
+
+  .contact-hero-image { max-width: 240px; margin: 0 auto; }
+
+ .contact-hero-text {
+    text-align: center;
+  }
+  .contact-hero-text h1::after { margin-left: auto; margin-right: auto; }
+  .contact-info-list {
+    align-items: center;
+  }
+
+  .contact-info-list li {
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: 600px) {
+
+  /* Row layout (icon beside the text) doesn't give the email address
+     anywhere to wrap at this width — it just overflows past the edge
+     instead of shrinking, since flex items don't wrap their content by
+     default. Stacking icon above text sidesteps that entirely: the link
+     gets the full row width to wrap within instead of sharing it with
+     the icon. */
+  .contact-info-list li {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    text-align: center;
+  }
+
+  .contact-info-list a {
+    word-break: break-word;
+  }
+}
+
+/* Onde estamos */
+.contact-where {
+  background: var(--color-header-bg);
+}
+
+.contact-where h3 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.4px;
+  margin: 0 0 clamp(28px, 3.5vw, 40px);
+  color: var(--color-text);
+}
+
+.contact-where h3::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #FF001C;
+  margin-top: var(--space-3);
+  border-radius: 2px;
+}
+
+.contact-where-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 4vw, 40px);
+  /* stretch (the grid default) instead of start — the map's height then
+     matches whatever .contact-where-left's cards naturally add up to,
+     rather than the two columns each keeping their own height. */
+  align-items: stretch;
+}
+
+.contact-where-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contact-card {
+  background: #ffffff;
+  border-radius: var(--radius-5);
+  padding: clamp(20px, 2.4vw, 28px);
+}
+
+.contact-card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+/* The SVG (contacts/*.svg) is already a complete circular badge — its own
+   background circle plus a colour-matched glyph — so this wrapper just
+   sizes/positions it rather than drawing a second circle behind it. */
+.contact-card-pin {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-card-pin img,
+.contact-transport-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.contact-card-title {
+  font-size: var(--font-size-h6);
+  font-weight: var(--font-weight-medium);
+  margin: 0 0 2px;
+  color: var(--color-text);
+}
+
+.contact-card-address {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-soft);
+  margin: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.contact-card p.contact-card-text {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-soft);
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+}
+
+.contact-card-text strong {
+  color: var(--color-text);
+  font-weight: var(--font-weight-bold);
+}
+
+.contact-transport-card {
+  border-radius: var(--radius-4);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  color: #ffffff;
+}
+
+.contact-transport-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-transport-title {
+  font-size: var(--font-size-h6);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.3px;
+  margin: 0 0 2px;
+}
+
+.contact-transport-card p {
+  font-size: var(--font-size-sm);
+  margin: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.contact-transport-card--blue { background: #005BAF; }
+.contact-transport-card--yellow { background: #f5c518; color: #111111; }
+.contact-transport-card--red { background: #FF001C; }
+
+.contact-map {
+  border-radius: var(--radius-5);
+  overflow: hidden;
+  height: 100%;
+  min-height: 420px;
+  background: #ffffff;
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .contact-where-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card-head,
+  .contact-transport-card {
+    gap: var(--space-4);
+  }
+
+  .contact-map {
+    min-height: 320px;
+  }
+
+  .contact-map iframe {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-card-head,
+  .contact-transport-card {
+    gap: var(--space-3);
+  }
+}

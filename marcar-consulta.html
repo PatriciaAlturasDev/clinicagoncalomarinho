@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F7F6F2" />
+  <title>Marcação de Consulta | Clínica Gonçalo Marinho</title>
+  <meta name="description" content="Marque a sua consulta na Clínica Gonçalo Marinho. Preencha o formulário e receba resposta no prazo máximo de 24 horas." />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/areas-data.js" defer></script>
+  <script src="js/team-data.js" defer></script>
+  <script src="js/dom-utils.js" defer></script>
+  <script src="js/url-utils.js" defer></script>
+  <script src="js/img-fallback.js" defer></script>
+  <script src="js/header.js" defer></script>
+  <script src="js/footer.js" defer></script>
+  <script src="js/whatsapp-float.js" defer></script>
+  <script src="js/scroll-reveal.js" defer></script>
+  <script src="js/area-cta.js" defer></script>
+  <script src="js/manifest-grid.js" defer></script>
+  <script src="js/area-detail.js" defer></script>
+  <script src="js/home-areas.js" defer></script>
+  <script src="js/home-approach.js" defer></script>
+  <script src="js/team-grid.js" defer></script>
+  <script src="js/team-detail.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1/bundle/libphonenumber-js.min.js" defer></script>
+  <script src="js/booking-form.js" defer></script>
+  <script src="js/spa-router.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body class="page-marcar-consulta">
+  <div id="site-header"></div>
+  <main>
+    <!-- MARCAÇÃO DE CONSULTA — accordion/validation behaviour lives in
+         js/booking-form.js; this markup only needs updating if a question,
+         option, or field is added/removed. -->
+    <section class="booking-hero section-spacing">
+     <!-- <img src="assets/vector-blue.svg" alt="" class="booking-decor booking-decor--blue" aria-hidden="true" />
+      <img src="assets/vector-yellow-small.svg" alt="" class="booking-decor booking-decor--yellow" aria-hidden="true" />
+      <img src="assets/vector-red-small.svg" alt="" class="booking-decor booking-decor--red-mid" aria-hidden="true" />
+      <img src="assets/vector-red-bottom.svg" alt="" class="booking-decor booking-decor--red" aria-hidden="true" />
+      <span class="booking-dot booking-dot--yellow" aria-hidden="true"></span>
+      <span class="booking-dot booking-dot--blue" aria-hidden="true"></span>  -->
+
+      <div class="booking-container">
+        <div class="booking-head">
+          <h1>Marcação de Consulta</h1>
+          <p>Por favor preencha o formulário e responderemos no prazo máximo de  <strong>24h.</strong></p>
+        </div>
+
+        <form class="booking-form" id="booking-form" novalidate>
+          <!-- Web3Forms (web3forms.com) delivers the submission straight to
+               geral@clinicagoncalomarinho.com — no backend of our own needed.
+               access_key authorises the request; it isn't tied to a specific
+               domain, so this works from localhost/file:// during development
+               too, not just once the site is actually deployed. -->
+          <input type="hidden" name="access_key" value="083e1108-c33a-4c49-bff9-7db114f70794" />
+          <input type="checkbox" name="botcheck" class="booking-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="booking-field">
+            <input type="text" id="booking-name" name="name" placeholder="Nome" autocomplete="name" required />
+          </div>
+          <div class="booking-field">
+            <input type="tel" id="booking-phone" name="phone" placeholder="Telemóvel" autocomplete="tel" inputmode="tel" required />
+            <span class="booking-field-error" id="booking-phone-error">Número inválido. Formato esperado: +351912345678 ou 912345678.</span>
+          </div>
+          <div class="booking-field">
+            <input type="email" id="booking-email" name="email" placeholder="Email" autocomplete="email" required />
+            <span class="booking-field-error" id="booking-email-error">Email inválido. Formato esperado: utilizador@dominio.com.</span>
+          </div>
+
+          <div class="booking-accordions">
+            <div class="booking-accordion booking-accordion--red" data-group="tipo" data-value="">
+              <button type="button" class="booking-accordion-header" aria-expanded="false">
+                <span>
+                  <strong>Tipo de Consulta</strong>
+                  <small>Selecione uma opção</small>
+                </span>
+                <i class="fa-solid fa-arrow-up booking-accordion-chevron" aria-hidden="true"></i>
+              </button>
+              <div class="booking-accordion-panel">
+                <div class="booking-accordion-panel-inner" role="radiogroup" aria-label="Tipo de consulta">
+                  <div class="booking-accordion-panel-box">
+                    <div class="booking-option" data-value="Psiquiatria Geral (Adulto)">Psiquiatria Geral (Adulto)</div>
+                    <div class="booking-option" data-value="Neurodesenvolvimento (Adulto)">Neurodesenvolvimento (Adulto)</div>
+                    <div class="booking-option" data-value="Pedopsiquiatria">Pedopsiquiatria</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="booking-accordion booking-accordion--yellow" data-group="modalidade" data-value="">
+              <button type="button" class="booking-accordion-header" aria-expanded="false">
+                <span>
+                  <strong>Modalidade Preferencial</strong>
+                  <small>Selecione uma opção</small>
+                </span>
+                <i class="fa-solid fa-arrow-up booking-accordion-chevron" aria-hidden="true"></i>
+              </button>
+              <div class="booking-accordion-panel">
+                <div class="booking-accordion-panel-inner" role="radiogroup" aria-label="Modalidade preferencial">
+                  <div class="booking-accordion-panel-box">
+                    <div class="booking-option" data-value="Consulta online">Consulta online</div>
+                    <div class="booking-option" data-value="Consulta presencial">Consulta presencial</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="booking-accordion booking-accordion--blue" data-group="contacto" data-value="">
+              <button type="button" class="booking-accordion-header" aria-expanded="false">
+                <span>
+                  <strong>Preferência de Contacto</strong>
+                  <small>Selecione uma opção</small>
+                </span>
+                <i class="fa-solid fa-arrow-up booking-accordion-chevron" aria-hidden="true"></i>
+              </button>
+              <div class="booking-accordion-panel">
+                <div class="booking-accordion-panel-inner" role="radiogroup" aria-label="Preferência de contacto">
+                  <div class="booking-accordion-panel-box">
+                    <div class="booking-option" data-value="Email">Email</div>
+                    <div class="booking-option" data-value="Whatsapp">Whatsapp</div>
+                    <div class="booking-option" data-value="Chamada telefónica">Chamada telefónica</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="booking-field">
+            <textarea id="booking-message" name="message" placeholder="Mensagem (opcional)" rows="1"></textarea>
+          </div>
+
+          <label class="booking-checkbox">
+            <input type="checkbox" id="booking-consent" required />
+            <span>Li e aceito a <a href="politica-privacidade.html">Política de Privacidade</a> e o tratamento dos meus dados pessoais para efeitos de contacto</span>
+          </label>
+
+          <button type="submit" class="booking-submit" disabled>
+            <span class="booking-submit-label">Enviar pedido de marcação</span>
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </button>
+          <p class="booking-error">Não foi possível enviar o pedido. Tente novamente ou contacte-nos diretamente para geral@clinicagoncalomarinho.com.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+</body>
+</html>
