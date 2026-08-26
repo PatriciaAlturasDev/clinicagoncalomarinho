@@ -2800,14 +2800,20 @@ body {
   max-width: 100%;
   height: auto;
 }
+@media (min-width: 750px) and (max-width: 1024px) {
+    .home-hero-actions {
+    justify-content: center;
+  }
 
+    .home-hero-grid {
+     text-align: center;
+  }
+}
 @media (max-width: 1024px) {
   .home-hero-grid {
     grid-template-columns: 1fr;
     gap: clamp(32px, 4vw, 40px);
   }
-
-
 
   .home-hero-image {
     max-width: 460px;
