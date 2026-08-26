@@ -6,29 +6,29 @@
   <meta name="theme-color" content="#F7F6F2" />
   <title>Contactos | Clínica Gonçalo Marinho</title>
   <meta name="description" content="Contactos da Clínica Gonçalo Marinho — morada, telefone, email e formulário de marcação de consulta." />
-  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/brand/logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-  <script src="js/areas-data.js" defer></script>
-  <script src="js/team-data.js" defer></script>
-  <script src="js/dom-utils.js" defer></script>
-  <script src="js/url-utils.js" defer></script>
-  <script src="js/img-fallback.js" defer></script>
-  <script src="js/header.js" defer></script>
-  <script src="js/footer.js" defer></script>
-  <script src="js/whatsapp-float.js" defer></script>
-  <script src="js/scroll-reveal.js" defer></script>
-  <script src="js/area-cta.js" defer></script>
-  <script src="js/manifest-grid.js" defer></script>
-  <script src="js/area-detail.js" defer></script>
-  <script src="js/home-areas.js" defer></script>
-  <script src="js/home-approach.js" defer></script>
-  <script src="js/team-grid.js" defer></script>
-  <script src="js/team-detail.js" defer></script>
+  <script src="js/data/areas-data.js" defer></script>
+  <script src="js/data/team-data.js" defer></script>
+  <script src="js/utils/dom-utils.js" defer></script>
+  <script src="js/utils/url-utils.js" defer></script>
+  <script src="js/utils/img-fallback.js" defer></script>
+  <script src="js/components/header.js" defer></script>
+  <script src="js/components/footer.js" defer></script>
+  <script src="js/components/whatsapp-float.js" defer></script>
+  <script src="js/components/scroll-reveal.js" defer></script>
+  <script src="js/components/area-cta.js" defer></script>
+  <script src="js/components/manifest-grid.js" defer></script>
+  <script src="js/components/area-detail.js" defer></script>
+  <script src="js/components/home-areas.js" defer></script>
+  <script src="js/components/home-approach.js" defer></script>
+  <script src="js/components/team-grid.js" defer></script>
+  <script src="js/components/team-detail.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1/bundle/libphonenumber-js.min.js" defer></script>
-  <script src="js/booking-form.js" defer></script>
+  <script src="js/components/booking-form.js" defer></script>
   <script src="js/spa-router.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
@@ -43,12 +43,12 @@
           <div class="contact-hero-text">
             <h1>Contactos</h1>
             <ul class="contact-info-list">
-              <li><img src="contacts/tele.svg" alt="" class="contact-info-icon" /> <a href="tel:+351913310251">+351 913 310 251</a></li>
-              <li><img src="contacts/envelope.svg" alt="" class="contact-info-icon" /> <a href="mailto:geral@clinicagoncalomarinho.com">geral@clinicagoncalomarinho.com</a></li>
+              <li><img src="assets/contacts/tele.svg" alt="" class="contact-info-icon" /> <a href="tel:+351913310251">+351 913 310 251</a></li>
+              <li><img src="assets/contacts/envelope.svg" alt="" class="contact-info-icon" /> <a href="mailto:geral@clinicagoncalomarinho.com">geral@clinicagoncalomarinho.com</a></li>
             </ul>
           </div>
           <div class="contact-hero-image">
-            <img src="assets/contacts.svg" alt="Ilustração de uma pessoa ao telefone" />
+            <img src="assets/illustrations/contacts.svg" alt="Ilustração de uma pessoa ao telefone" />
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@
           <div class="contact-where-left">
             <div class="contact-card">
               <div class="contact-card-head">
-                <span class="contact-card-pin"><img src="contacts/clinica.svg" alt="" /></span>
+                <span class="contact-card-pin"><img src="assets/contacts/clinica.svg" alt="" /></span>
                 <div>
                   <div class="contact-card-title">Clínica Gonçalo Marinho</div>
                   <p class="contact-card-address">Rua Rainha Dona Luísa de Gusmão 14A<br>1600-687 Lisboa</p>
@@ -72,7 +72,7 @@
             </div>
 
             <div class="contact-transport-card contact-transport-card--blue">
-              <span class="contact-transport-icon"><img src="contacts/metro.svg" alt="" /></span>
+              <span class="contact-transport-icon"><img src="assets/contacts/metro.svg" alt="" /></span>
               <div>
                 <div class="contact-transport-title">Metro</div>
                 <p>Estações Lumiar e Quintas das Conchas (Linha Amarela) a 8 min. a pé</p>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="contact-transport-card contact-transport-card--yellow">
-              <span class="contact-transport-icon"><img src="contacts/autocarros.svg" alt="" /></span>
+              <span class="contact-transport-icon"><img src="assets/contacts/autocarros.svg" alt="" /></span>
               <div>
                 <div class="contact-transport-title">Autocarros</div>
                 <p>Linhas 44B, 45B, 207, 717, 736, 747, 2714 com paragens até 4 min. a pé</p>
@@ -88,7 +88,7 @@
             </div>
 
             <div class="contact-transport-card contact-transport-card--red">
-              <span class="contact-transport-icon"><img src="contacts/estacionamento.svg" alt="" /></span>
+              <span class="contact-transport-icon"><img src="assets/contacts/estacionamento.svg" alt="" /></span>
               <div>
                 <div class="contact-transport-title">Estacionamento</div>
                 <p>Disponível nas imediações da clínica</p>

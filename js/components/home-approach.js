@@ -24,7 +24,7 @@
     if (!slot || !items) return;
     slot.outerHTML = items.map(homeApproachItemHTML).join('');
     // Per-card alternating slide-in as each row scrolls into view — see
-    // js/scroll-reveal.js.
+    // js/components/scroll-reveal.js.
     Site.mountAlternatingCardReveal('.home-approach-item');
   };
 })();

@@ -10,7 +10,7 @@
   'use strict';
   window.Site = window.Site || {};
 
-  var IMG_FALLBACK_SRC = 'assets/user.png';
+  var IMG_FALLBACK_SRC = 'assets/icons/user.png';
 
   Site.IMG_FALLBACK_ATTR =
     'onerror="this.onerror=null;this.src=\'' + IMG_FALLBACK_SRC + '\';this.classList.add(\'img-fallback\')"';

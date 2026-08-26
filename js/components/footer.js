@@ -13,7 +13,7 @@
       '<footer class="footer">',
       '  <div class="footer-container">',
       '    <a href="index.html" class="footer-logo">',
-      '      <img src="assets/footer-logo.svg" alt="Clínica Gonçalo Marinho" />',
+      '      <img src="assets/brand/footer-logo.svg" alt="Clínica Gonçalo Marinho" />',
       '    </a>',
       '    <ul class="footer-links">',
       '      <li><a href="politica-privacidade.html" class="footer-link">Política de Privacidade</a></li>',

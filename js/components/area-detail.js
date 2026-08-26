@@ -4,7 +4,7 @@
    Each area page (ansiedade.html, phda.html, …) is a thin template — a
    single #area-detail placeholder carrying the area's slug. All hero
    copy and "Quando procurar ajuda" cards are looked up in window.AREAS
-   (js/areas-data.js), the same list that builds the homepage grid, so
+   (js/data/areas-data.js), the same list that builds the homepage grid, so
    there is exactly one place to edit either.
    ============================ */
 (function () {

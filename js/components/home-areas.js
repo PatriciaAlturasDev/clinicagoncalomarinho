@@ -1,7 +1,7 @@
 /* ============================
    Homepage "Áreas de atuação" tiles
    ----------------------------
-   Sourced from window.AREAS (js/areas-data.js) — the same list that
+   Sourced from window.AREAS (js/data/areas-data.js) — the same list that
    builds every area's detail page.
    ============================ */
 (function () {
@@ -30,7 +30,7 @@
     // outerHTML so each card lands as its own grid item, not wrapped in the slot div.
     slot.outerHTML = items.map(homeAreaCardHTML).join('');
     // Cards pop in one by one as the section scrolls into view — see
-    // js/scroll-reveal.js.
+    // js/components/scroll-reveal.js.
     Site.mountStaggeredCardReveal('.home-areas', '.home-area-card', '.home-areas-title');
   };
 })();

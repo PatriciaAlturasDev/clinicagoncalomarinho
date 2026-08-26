@@ -18,7 +18,7 @@
     '        <p class="area-cta-headline">pode ser útil procurar uma avaliação especializada.</p>',
     '      </div>',
     '      <a href="marcar-consulta.html" class="area-cta-button">',
-    '        <img src="assets/calendar.png" alt="" />',
+    '        <img src="assets/icons/calendar.png" alt="" />',
     '        <span>Marcar Consulta</span>',
     '      </a>',
     '    </div>',

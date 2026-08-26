@@ -12,7 +12,7 @@
   // "Áreas de Atuação" dropdown intentionally left out of NAV_ITEMS for
   // now (not in use in the header yet) — the dropdown-rendering code
   // below still supports it; add an item with type: 'dropdown' back in
-  // when it's ready. See js/areas-data.js for the source list.
+  // when it's ready. See js/data/areas-data.js for the source list.
   var NAV_ITEMS = [
     { type: 'link', href: 'index.html', label: 'INÍCIO', match: ['index.html'] },
     { type: 'link', href: 'consultas.html', label: 'CONSULTAS', match: ['consultas.html'] },
@@ -20,10 +20,10 @@
     { type: 'link', href: 'contactos.html', label: 'CONTACTOS', match: ['contactos.html'] }
   ];
 
-  // Same calendar icon (assets/calendar.png) as the "Marcar Consulta" CTA
-  // button used throughout the site (see js/area-cta.js), rather than its
+  // Same calendar icon (assets/icons/calendar.png) as the "Marcar Consulta" CTA
+  // button used throughout the site (see js/components/area-cta.js), rather than its
   // own separate inline SVG glyph.
-  var CALENDAR_ICON = '<img src="assets/calendar.png" alt="" />';
+  var CALENDAR_ICON = '<img src="assets/icons/calendar.png" alt="" />';
   var CHEVRON_ICON = '<svg class="chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 5 6 8 9 5"></polyline></svg>';
   var HAMBURGER_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
   var CLOSE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
@@ -68,7 +68,7 @@
       '<header class="header">',
       '  <div class="header-container">',
       '    <a href="index.html" class="logo" aria-label="Clínica Gonçalo Marinho - Início">',
-      '      <img src="assets/logo.svg" alt="Clínica Gonçalo Marinho" />',
+      '      <img src="assets/brand/logo.svg" alt="Clínica Gonçalo Marinho" />',
       '    </a>',
       '    <nav class="primary-nav" aria-label="Navegação principal">',
       '      <ul class="nav-list">',

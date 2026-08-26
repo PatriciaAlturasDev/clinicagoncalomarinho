@@ -29,7 +29,7 @@
     // Cards start hidden (see #team-grid .team-card in style.css) and pop
     // in one by one as each row actually scrolls into view — same
     // scroll-triggered stagger as the "Áreas de atuação" cards (see
-    // js/scroll-reveal.js's mountStaggeredCardReveal). The team grid has
+    // js/components/scroll-reveal.js's mountStaggeredCardReveal). The team grid has
     // enough members to span several rows, taller than the viewport, so
     // a plain on-mount stagger (the previous approach) was revealing
     // every card immediately regardless of whether it was actually
