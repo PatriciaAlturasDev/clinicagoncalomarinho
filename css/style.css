@@ -172,6 +172,15 @@ h1, h2, h3, h4, h5, h6, p, li, a, span {
   overflow-wrap: break-word;
 }
 
+/* Wraps just the word "Neurodesenvolvimento" wherever a heading needs to
+   break it. overflow-wrap: normal cancels the break-word rule above for
+   this span, so the only place the word is allowed to split is the
+   explicit soft hyphen (&shy;) placed in its markup — never an arbitrary
+   mid-word cut that could strand a lone orphan letter on its own line. */
+.no-break-word {
+  overflow-wrap: normal;
+}
+
 /* Standard heading sizes for page/section titles. Fluid via clamp(), so
    there's no separate mobile breakpoint to keep in sync. Card- and
    list-level h2/h3/h4 keep their own smaller, context-specific font-size. */
