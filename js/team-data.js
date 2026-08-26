@@ -143,7 +143,7 @@ window.TEAM_MEMBERS = [
     photo: 'assets/team/raquel-campos.png',
     detailPhoto: 'assets/team/raquel-detail.svg',
     bio: [
-      'Médica especialista em Psiquiatria da Infância e da Adolescência, licenciada e mestre em Medicina pela Universidade Nova de Lisboa, comformação especializada em Psiquiatria da Infância e da Adolescência no Hospital Garcia de Orta.',
+      'Médica especialista em Psiquiatria da Infância e da Adolescência, licenciada e mestre em Medicina pela Universidade Nova de Lisboa, com formação especializada em Psiquiatria da Infância e da Adolescência no Hospital Garcia de Orta.',
       'Dedica-se à avaliação, diagnóstico e tratamento das perturbações do neurodesenvolvimento na infância e adolescência, nomeadamente a Perturbação de Hiperatividade e Défice de Atenção (PHDA), Perturbação do Espetro do Autismo (PEA), perturbações da linguagem e da comunicação e perturbações específicas da aprendizagem, bem como às perturbações do comportamento e perturbações aditivas.',
       'Valoriza uma abordagem clínica próxima, individualizada e baseada na evidência científica, procurando compreender as necessidades de cada criança, adolescente e família, promovendo um acompanhamento colaborativo ao longo do desenvolvimento.'
     ]
